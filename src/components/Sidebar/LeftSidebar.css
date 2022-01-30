@@ -1,0 +1,51 @@
+.topicsfollow {
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 5.4rem;
+  height: max-content;
+}
+
+.topicsfollow .upper {
+  border-bottom: 0.1rem solid #737373;
+  width: 100%;
+}
+
+.topicsfollow .upper h2 {
+  color: #737373;
+  font-size: 1.4rem;
+}
+
+.topicsfollow .upper h3 {
+  color: #5aa5b9;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.topicsfollow .upper h3:hover {
+  text-decoration: underline;
+}
+
+.topicsfollow .tags-wrapper {
+  display: flex;
+  grid-gap: 1rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.topicsfollow .tags-wrapper .tag {
+  cursor: pointer;
+  display: inline-block;
+  background-color: #3f4156;
+  height: fit-content;
+  width: fit-content;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.4rem;
+  color: #ffffff;
+}
