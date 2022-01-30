@@ -19,6 +19,13 @@
   gap: 0.4rem;
 }
 
+.feed .header .user img {
+  width: 4.2rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
 .feed .header .user .userinfo small {
   color: gray;
 }
