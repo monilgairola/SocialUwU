@@ -4,7 +4,7 @@
 }
 
 .pfp {
-  width: 2.7rem;
+  width: 3rem;
   aspect-ratio: 1/1;
   border-radius: 50%;
   overflow: hidden;
@@ -66,6 +66,6 @@ nav .searchbar input::placeholder {
 
 .leftstuff {
   display: flex;
-  gap: 5rem;
+  gap: 4rem;
   align-items: center;
 }
