@@ -1,5 +1,6 @@
 import React from "react";
 import "./MiddleStuff.css";
+import Feed from "../Feed/Feed";
 
 const MiddleStuff = () => {
   return (
@@ -11,6 +12,10 @@ const MiddleStuff = () => {
         />
         <input type="text" placeholder="Create shitty post ..." />
         <p className="buttonboi">Create</p>
+      </div>
+      <div className="feeds">
+        <Feed />
+        <Feed />
       </div>
     </div>
   );
