@@ -17,7 +17,7 @@ const RightSidebar = () => {
         </div>
       </div>
       <div className="sidebar">
-        <div className="sidebar-item">
+        <div className="sidebar-item sidebar-active">
           <span>
             <i className="uil uil-home"></i>
           </span>

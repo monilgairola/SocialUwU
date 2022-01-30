@@ -4,8 +4,8 @@
 }
 
 .pfp {
-  width: 3rem;
-  aspect-ratio: 1/1;
+  width: 4rem;
+  height: 3rem;
   border-radius: 50%;
   overflow: hidden;
 }
