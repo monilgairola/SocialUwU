@@ -1,7 +1,9 @@
 import React from "react";
 import "./RightSidebar.css";
+import { useNavigate } from "react-router-dom";
 
 const RightSidebar = () => {
+  const navigate = useNavigate();
   return (
     <div className="rightsidebar">
       <div className="profile">
@@ -17,18 +19,46 @@ const RightSidebar = () => {
         </div>
       </div>
       <div className="sidebar">
-        <div className="sidebar-item sidebar-active">
-          <span>
-            <i className="uil uil-home"></i>
-          </span>
-          <h3>Home</h3>
-        </div>
-        <div className="sidebar-item">
-          <span>
-            <i className="uil uil-compass"></i>
-          </span>
-          <h3>Explore</h3>
-        </div>
+        {window.location.href === "http://localhost:3000/" ? (
+          <div className="sidebar-item home-sidebar-active">
+            <span>
+              <i className="uil uil-home"></i>
+            </span>
+            <h3>Home</h3>
+          </div>
+        ) : (
+          <div
+            className="sidebar-item"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            <span>
+              <i className="uil uil-home"></i>
+            </span>
+            <h3>Home</h3>
+          </div>
+        )}
+        {window.location.href === "http://localhost:3000/explore" ? (
+          <div className="sidebar-item explore-sidebar-active">
+            <span>
+              <i className="uil uil-compass"></i>
+            </span>
+            <h3>Explore</h3>
+          </div>
+        ) : (
+          <div
+            className="sidebar-item"
+            onClick={() => {
+              navigate("/explore");
+            }}
+          >
+            <span>
+              <i className="uil uil-compass"></i>
+            </span>
+            <h3>Explore</h3>
+          </div>
+        )}
         <div className="sidebar-item">
           <span>
             <i className="uil uil-bell"></i>

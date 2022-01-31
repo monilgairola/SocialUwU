@@ -71,13 +71,23 @@
   opacity: 0.8;
 }
 
-.sidebar .sidebar-active {
+.sidebar .home-sidebar-active {
   background-color: #cfcfcf57;
   border-left: 0.3rem solid #6f53f3;
   border-top-left-radius: 1rem;
 }
 
-.sidebar .sidebar-active h3,
-.sidebar .sidebar-active i {
+.sidebar .home-sidebar-active h3,
+.sidebar .home-sidebar-active i {
+  color: #6f53f3;
+}
+
+.sidebar .explore-sidebar-active {
+  background-color: #cfcfcf57;
+  border-left: 0.3rem solid #6f53f3;
+}
+
+.sidebar .explore-sidebar-active h3,
+.sidebar .explore-sidebar-active i {
   color: #6f53f3;
 }
