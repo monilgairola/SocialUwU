@@ -59,12 +59,26 @@ const RightSidebar = () => {
             <h3>Explore</h3>
           </div>
         )}
-        <div className="sidebar-item">
-          <span>
-            <i className="uil uil-bell"></i>
-          </span>
-          <h3>Notifications</h3>
-        </div>
+        {window.location.href === "http://localhost:3000/notifications" ? (
+          <div className="sidebar-item notification-sidebar-active">
+            <span>
+              <i className="uil uil-bell"></i>
+            </span>
+            <h3>Notifications</h3>
+          </div>
+        ) : (
+          <div
+            className="sidebar-item"
+            onClick={() => {
+              navigate("/notifications");
+            }}
+          >
+            <span>
+              <i className="uil uil-bell"></i>
+            </span>
+            <h3>Notifications</h3>
+          </div>
+        )}
         <div className="sidebar-item">
           <span>
             <i className="uil uil-bookmark"></i>

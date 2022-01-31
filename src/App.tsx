@@ -3,6 +3,7 @@ import Home from "./pages/Home/Home";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Explore from "./pages/Explore/Explore";
+import Notifications from "./pages/Notifications/Notifications";
 
 const App: React.FC = () => {
   return (
@@ -10,6 +11,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/explore" element={<Explore />} />
+        <Route path="/notifications" element={<Notifications />} />
       </Routes>
     </Router>
   );
