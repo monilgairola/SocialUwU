@@ -35,3 +35,17 @@
   transition: all 300ms ease;
   padding: 0.7rem 2rem;
 }
+
+@media screen and (max-width: 992px) {
+  .create-post-div img {
+    width: 4rem;
+    height: 3rem;
+    border-radius: 50%;
+  }
+  .create-post-div input {
+    margin-left: 0.3rem;
+  }
+  .create-post-div .buttonboi {
+    display: none;
+  }
+}
