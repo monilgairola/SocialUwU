@@ -71,3 +71,12 @@ nav .searchbar input::placeholder {
   gap: 4rem;
   align-items: center;
 }
+
+@media screen and (max-width: 992px) {
+  nav .searchbar {
+    display: none;
+  }
+  nav .create-btn {
+    display: none;
+  }
+}

@@ -122,3 +122,28 @@
 .sidebar .settings-sidebar-active i {
   color: #6f53f3;
 }
+
+@media screen and (max-width: 1200px) {
+  .rightsidebar {
+    width: 5rem;
+    z-index: 5;
+  }
+  .rightsidebar .profile {
+    display: none;
+  }
+  .rightsidebar .sidebar h3 {
+    display: none;
+  }
+  .rightsidebar .createpostbutton {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .rightsidebar {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    grid-column: 3/4;
+  }
+}
