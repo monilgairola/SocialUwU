@@ -101,3 +101,13 @@
 .sidebar .notification-sidebar-active i {
   color: #6f53f3;
 }
+
+.sidebar .bookmarks-sidebar-active {
+  background-color: #cfcfcf57;
+  border-left: 0.3rem solid #6f53f3;
+}
+
+.sidebar .bookmarks-sidebar-active h3,
+.sidebar .bookmarks-sidebar-active i {
+  color: #6f53f3;
+}

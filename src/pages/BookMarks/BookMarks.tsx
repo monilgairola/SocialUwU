@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
-import NotificationsMiddleStuff from "../../components/NotificationsMiddleStuff/NotificationsMiddleStuff";
 import LeftSidebar from "../../components/Sidebar/LeftSidebar";
 import RightSidebar from "../../components/Sidebar/RightSidebar";
-import "./Notifications.css";
+import "./BookMarks.css";
+import BookMarksMiddleStuff from "../../components/BookMarksMiddleStuff/BokkMarksMiddleStuff";
 
-const Notifications = () => {
+const BookMarks = () => {
   useEffect(() => {
-    document.title = "SocialUwU - Notifications";
+    document.title = "SocialUwU - BookMarks";
   }, []);
   return (
     <div>
@@ -15,7 +15,7 @@ const Notifications = () => {
       <main>
         <div className="container">
           <RightSidebar />
-          <NotificationsMiddleStuff />
+          <BookMarksMiddleStuff />
           <LeftSidebar />
         </div>
       </main>
@@ -23,4 +23,4 @@ const Notifications = () => {
   );
 };
 
-export default Notifications;
+export default BookMarks;

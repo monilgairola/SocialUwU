@@ -6,7 +6,9 @@ import RightSidebar from "../../components/Sidebar/RightSidebar";
 import "./Home.css";
 
 const Home: React.FC = () => {
-  useEffect(() => {}, []);
+  useEffect(() => {
+    document.title = "SocialUwU - Home";
+  }, []);
   return (
     <div>
       <Navbar />

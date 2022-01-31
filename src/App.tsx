@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Explore from "./pages/Explore/Explore";
 import Notifications from "./pages/Notifications/Notifications";
+import BookMarks from "./pages/BookMarks/BookMarks";
 
 const App: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const App: React.FC = () => {
         <Route path="/" element={<Home />} />
         <Route path="/explore" element={<Explore />} />
         <Route path="/notifications" element={<Notifications />} />
+        <Route path="/bookmarks" element={<BookMarks />} />
       </Routes>
     </Router>
   );
