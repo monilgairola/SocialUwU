@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import LeftSidebarDark from "../../components/LeftSidebarDark/LeftSidebarDark";
 import Navbar from "../../components/Navbar/Navbar";
 import NavbarDark from "../../components/NavbarDark/NavbarDark";
 import SettingsMiddleStuff from "../../components/SettingsMiddleStuff/SettingsMiddleStuff";
@@ -27,8 +28,8 @@ const Settings = () => {
       <main>
         <div className="container">
           <RightSidebar />
-          <SettingsMiddleStuff />
-          <LeftSidebar />
+          <SettingsMiddleStuff theme={theme} />
+          {theme === "dark" ? <LeftSidebarDark /> : <LeftSidebar />}
         </div>
       </main>
     </div>

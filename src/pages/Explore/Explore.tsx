@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import LeftSidebarDark from "../../components/LeftSidebarDark/LeftSidebarDark";
 import MiddleStuff from "../../components/MiddleStuff/MiddleStuff";
 import Navbar from "../../components/Navbar/Navbar";
 import NavbarDark from "../../components/NavbarDark/NavbarDark";
@@ -28,7 +29,7 @@ const Explore = () => {
         <div className="container">
           <RightSidebar />
           <MiddleStuff />
-          <LeftSidebar />
+          {theme === "dark" ? <LeftSidebarDark /> : <LeftSidebar />}
         </div>
       </main>
     </div>

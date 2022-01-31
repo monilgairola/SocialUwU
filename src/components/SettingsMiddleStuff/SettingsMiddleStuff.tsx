@@ -3,8 +3,13 @@ import "./SettingsMiddleStuff.css";
 import Toggle from "react-toggle";
 import "react-toggle/style.css";
 
-const SettingsMiddleStuff = () => {
-  const [checked, setChecked] = useState<boolean>(false);
+type Shit = {
+  theme: string;
+};
+
+const SettingsMiddleStuff = (props: Shit) => {
+  console.log(props.theme === "dark");
+  const [checked, setChecked] = useState<boolean>(props?.theme === "dark");
   const onChecked = () => {
     setChecked(!checked);
     checked === true

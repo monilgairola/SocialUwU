@@ -59,6 +59,10 @@ img {
   background: rgba(138, 131, 131, 0.322);
 }
 
+.navbarboidark .searchbar i {
+  color: #ffffff;
+}
+
 .navbarboidark .searchbar input {
   width: 30vw;
   background: transparent;

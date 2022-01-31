@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import LeftSidebarDark from "../../components/LeftSidebarDark/LeftSidebarDark";
 import Navbar from "../../components/Navbar/Navbar";
 import NavbarDark from "../../components/NavbarDark/NavbarDark";
 import NotificationsMiddleStuff from "../../components/NotificationsMiddleStuff/NotificationsMiddleStuff";
@@ -28,7 +29,7 @@ const Notifications = () => {
         <div className="container">
           <RightSidebar />
           <NotificationsMiddleStuff />
-          <LeftSidebar />
+          {theme === "dark" ? <LeftSidebarDark /> : <LeftSidebar />}
         </div>
       </main>
     </div>

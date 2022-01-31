@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import LeftSidebarDark from "../../components/LeftSidebarDark/LeftSidebarDark";
 import MiddleStuff from "../../components/MiddleStuff/MiddleStuff";
 import Navbar from "../../components/Navbar/Navbar";
 import NavbarDark from "../../components/NavbarDark/NavbarDark";
@@ -8,7 +9,6 @@ import "./Home.css";
 
 const Home = () => {
   const [theme, setTheme] = useState<string>("");
-  console.log(theme === "dark");
   useEffect(() => {
     const themeboi = localStorage.getItem("theme");
     if (!themeboi) {
@@ -28,7 +28,7 @@ const Home = () => {
         <div className="container">
           <RightSidebar />
           <MiddleStuff />
-          <LeftSidebar />
+          {theme === "dark" ? <LeftSidebarDark /> : <LeftSidebar />}
         </div>
       </main>
     </div>
