@@ -6,6 +6,7 @@ import NavbarDark from "../../components/NavbarDark/NavbarDark";
 import LeftSidebar from "../../components/Sidebar/LeftSidebar";
 import RightSidebar from "../../components/Sidebar/RightSidebar";
 import "./Explore.css";
+import RightSidebarDark from "../../components/RightSidebarDark/RightSidebarDark";
 
 const Explore = () => {
   const [theme, setTheme] = useState<string>("");
@@ -27,7 +28,7 @@ const Explore = () => {
       {theme === "dark" ? <NavbarDark /> : <Navbar />}
       <main>
         <div className="container">
-          <RightSidebar />
+          {theme === "dark" ? <RightSidebarDark /> : <RightSidebar />}
           <MiddleStuff />
           {theme === "dark" ? <LeftSidebarDark /> : <LeftSidebar />}
         </div>

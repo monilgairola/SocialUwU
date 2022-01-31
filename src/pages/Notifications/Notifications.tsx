@@ -6,6 +6,7 @@ import NotificationsMiddleStuff from "../../components/NotificationsMiddleStuff/
 import LeftSidebar from "../../components/Sidebar/LeftSidebar";
 import RightSidebar from "../../components/Sidebar/RightSidebar";
 import "./Notifications.css";
+import RightSidebarDark from "../../components/RightSidebarDark/RightSidebarDark";
 
 const Notifications = () => {
   const [theme, setTheme] = useState<string>("");
@@ -27,7 +28,7 @@ const Notifications = () => {
       {theme === "dark" ? <NavbarDark /> : <Navbar />}
       <main>
         <div className="container">
-          <RightSidebar />
+          {theme === "dark" ? <RightSidebarDark /> : <RightSidebar />}
           <NotificationsMiddleStuff />
           {theme === "dark" ? <LeftSidebarDark /> : <LeftSidebar />}
         </div>

@@ -6,6 +6,7 @@ import SettingsMiddleStuff from "../../components/SettingsMiddleStuff/SettingsMi
 import LeftSidebar from "../../components/Sidebar/LeftSidebar";
 import RightSidebar from "../../components/Sidebar/RightSidebar";
 import "./Settings.css";
+import RightSidebarDark from "../../components/RightSidebarDark/RightSidebarDark";
 
 const Settings = () => {
   const [theme, setTheme] = useState<string>("");
@@ -27,7 +28,7 @@ const Settings = () => {
       {theme === "dark" ? <NavbarDark /> : <Navbar />}
       <main>
         <div className="container">
-          <RightSidebar />
+          {theme === "dark" ? <RightSidebarDark /> : <RightSidebar />}
           <SettingsMiddleStuff theme={theme} />
           {theme === "dark" ? <LeftSidebarDark /> : <LeftSidebar />}
         </div>
