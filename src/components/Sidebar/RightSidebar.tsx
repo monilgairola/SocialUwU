@@ -99,12 +99,26 @@ const RightSidebar = () => {
             <h3>Bookmarks</h3>
           </div>
         )}
-        <div className="sidebar-item">
-          <span>
-            <i className="uil uil-setting"></i>
-          </span>
-          <h3>Settings</h3>
-        </div>
+        {window.location.href === "http://localhost:3000/settings" ? (
+          <div className="sidebar-item settings-sidebar-active">
+            <span>
+              <i className="uil uil-setting"></i>
+            </span>
+            <h3>Settings</h3>
+          </div>
+        ) : (
+          <div
+            className="sidebar-item"
+            onClick={() => {
+              navigate("/settings");
+            }}
+          >
+            <span>
+              <i className="uil uil-setting"></i>
+            </span>
+            <h3>Settings</h3>
+          </div>
+        )}
       </div>
       <p className="createpostbutton">Create Post</p>
     </div>

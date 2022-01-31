@@ -111,3 +111,14 @@
 .sidebar .bookmarks-sidebar-active i {
   color: #6f53f3;
 }
+
+.sidebar .settings-sidebar-active {
+  background-color: #cfcfcf57;
+  border-left: 0.3rem solid #6f53f3;
+  border-bottom-left-radius: 1rem;
+}
+
+.sidebar .settings-sidebar-active h3,
+.sidebar .settings-sidebar-active i {
+  color: #6f53f3;
+}
