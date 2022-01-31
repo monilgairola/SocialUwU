@@ -19,7 +19,7 @@ const RightSidebar = () => {
         </div>
       </div>
       <div className="sidebar">
-        {window.location.href === "http://localhost:3000/" ? (
+        {window.location.href === "https://socialuwu.netlify.app/" ? (
           <div className="sidebar-item home-sidebar-active">
             <span>
               <i className="uil uil-home"></i>
@@ -39,7 +39,7 @@ const RightSidebar = () => {
             <h3>Home</h3>
           </div>
         )}
-        {window.location.href === "http://localhost:3000/explore" ? (
+        {window.location.href === "https://socialuwu.netlify.app/explore" ? (
           <div className="sidebar-item explore-sidebar-active">
             <span>
               <i className="uil uil-compass"></i>
@@ -59,7 +59,8 @@ const RightSidebar = () => {
             <h3>Explore</h3>
           </div>
         )}
-        {window.location.href === "http://localhost:3000/notifications" ? (
+        {window.location.href ===
+        "https://socialuwu.netlify.app/notifications" ? (
           <div className="sidebar-item notification-sidebar-active">
             <span>
               <i className="uil uil-bell"></i>
@@ -79,7 +80,7 @@ const RightSidebar = () => {
             <h3>Notifications</h3>
           </div>
         )}
-        {window.location.href === "http://localhost:3000/bookmarks" ? (
+        {window.location.href === "https://socialuwu.netlify.app/bookmarks" ? (
           <div className="sidebar-item bookmarks-sidebar-active">
             <span>
               <i className="uil uil-bookmark"></i>
@@ -99,7 +100,7 @@ const RightSidebar = () => {
             <h3>Bookmarks</h3>
           </div>
         )}
-        {window.location.href === "http://localhost:3000/settings" ? (
+        {window.location.href === "https://socialuwu.netlify.app/settings" ? (
           <div className="sidebar-item settings-sidebar-active">
             <span>
               <i className="uil uil-setting"></i>
