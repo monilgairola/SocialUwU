@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import "./SettingsDark.css";
 import Toggle from "react-toggle";
 import "react-toggle/style.css";
+import { useNavigate } from "react-router-dom";
 
 type Shit = {
   theme: string;
 };
 
 const SettingsDark = (props: Shit) => {
-  console.log(props.theme === "dark");
+  const navigate = useNavigate();
   const [checked, setChecked] = useState<boolean>(props?.theme === "dark");
   const onChecked = () => {
     setChecked(!checked);
     checked === true
       ? localStorage.setItem("theme", "light")
       : localStorage.setItem("theme", "dark");
-    window.location.reload();
+    navigate("/");
   };
   return (
     <div className="settingmiddlestuff">

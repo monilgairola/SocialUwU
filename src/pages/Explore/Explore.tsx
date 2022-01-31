@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import LeftSidebarDark from "../../components/LeftSidebarDark/LeftSidebarDark";
-import MiddleStuff from "../../components/MiddleStuff/MiddleStuff";
 import Navbar from "../../components/Navbar/Navbar";
 import NavbarDark from "../../components/NavbarDark/NavbarDark";
 import LeftSidebar from "../../components/Sidebar/LeftSidebar";
 import RightSidebar from "../../components/Sidebar/RightSidebar";
 import "./Explore.css";
 import RightSidebarDark from "../../components/RightSidebarDark/RightSidebarDark";
-import MiddleStuffDark from "../../components/MiddleStuffDark/MiddleStuffDark";
+import ExploreMiddle from "../../components/ExploreMiddle/ExploreMiddle";
+import ExploreMiddleDark from "../../components/ExploreMiddleDark/ExploreMiddleDark";
 
 const Explore = () => {
   const [theme, setTheme] = useState<string>("");
@@ -30,7 +30,7 @@ const Explore = () => {
       <main>
         <div className="container">
           {theme === "dark" ? <RightSidebarDark /> : <RightSidebar />}
-          {theme === "dark" ? <MiddleStuffDark /> : <MiddleStuff />}
+          {theme === "dark" ? <ExploreMiddleDark /> : <ExploreMiddle />}
           {theme === "dark" ? <LeftSidebarDark /> : <LeftSidebar />}
         </div>
       </main>
