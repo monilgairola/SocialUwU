@@ -8,7 +8,7 @@ const Navbar: React.FC = () => {
         <h2 className="logo">SocialUwU</h2>
         <div className="searchbar">
           <i className="uil uil-search"></i>
-          <input type="search" placeholder="Search shit ..." />
+          <input type="text" placeholder="Search shit ..." />
         </div>
         <div className="leftstuff">
           <p className="create-btn">Create</p>

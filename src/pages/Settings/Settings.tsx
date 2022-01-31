@@ -7,6 +7,7 @@ import LeftSidebar from "../../components/Sidebar/LeftSidebar";
 import RightSidebar from "../../components/Sidebar/RightSidebar";
 import "./Settings.css";
 import RightSidebarDark from "../../components/RightSidebarDark/RightSidebarDark";
+import SettingsDark from "../../components/SettingsDark/SettingsDark";
 
 const Settings = () => {
   const [theme, setTheme] = useState<string>("");
@@ -29,7 +30,11 @@ const Settings = () => {
       <main>
         <div className="container">
           {theme === "dark" ? <RightSidebarDark /> : <RightSidebar />}
-          <SettingsMiddleStuff theme={theme} />
+          {theme === "dark" ? (
+            <SettingsDark theme={theme} />
+          ) : (
+            <SettingsMiddleStuff theme={theme} />
+          )}
           {theme === "dark" ? <LeftSidebarDark /> : <LeftSidebar />}
         </div>
       </main>

@@ -7,6 +7,7 @@ import BookMarksMiddleStuff from "../../components/BookMarksMiddleStuff/BokkMark
 import NavbarDark from "../../components/NavbarDark/NavbarDark";
 import LeftSidebarDark from "../../components/LeftSidebarDark/LeftSidebarDark";
 import RightSidebarDark from "../../components/RightSidebarDark/RightSidebarDark";
+import BookMarksDark from "../../components/BookMarksDark/BookMarksDark";
 
 const BookMarks = () => {
   const [theme, setTheme] = useState<string>("");
@@ -29,7 +30,7 @@ const BookMarks = () => {
       <main>
         <div className="container">
           {theme === "dark" ? <RightSidebarDark /> : <RightSidebar />}
-          <BookMarksMiddleStuff />
+          {theme === "dark" ? <BookMarksDark /> : <BookMarksMiddleStuff />}
           {theme === "dark" ? <LeftSidebarDark /> : <LeftSidebar />}
         </div>
       </main>

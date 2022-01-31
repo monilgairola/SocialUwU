@@ -7,6 +7,7 @@ import RightSidebarDark from "../../components/RightSidebarDark/RightSidebarDark
 import LeftSidebar from "../../components/Sidebar/LeftSidebar";
 import RightSidebar from "../../components/Sidebar/RightSidebar";
 import "./Home.css";
+import MiddleStuffDark from "../../components/MiddleStuffDark/MiddleStuffDark";
 
 const Home = () => {
   const [theme, setTheme] = useState<string>("");
@@ -28,7 +29,7 @@ const Home = () => {
       <main>
         <div className="container">
           {theme === "dark" ? <RightSidebarDark /> : <RightSidebar />}
-          <MiddleStuff />
+          {theme === "dark" ? <MiddleStuffDark /> : <MiddleStuff />}
           {theme === "dark" ? <LeftSidebarDark /> : <LeftSidebar />}
         </div>
       </main>

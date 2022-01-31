@@ -8,7 +8,7 @@ const NavbarDark: React.FC = () => {
         <h2 className="logodark">SocialUwU</h2>
         <div className="searchbar">
           <i className="uil uil-search"></i>
-          <input type="search" placeholder="Search shit ..." />
+          <input type="text" placeholder="Search shit ..." />
         </div>
         <div className="leftstuffdark">
           <p className="create-btn">Create</p>

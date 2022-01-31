@@ -7,6 +7,7 @@ import LeftSidebar from "../../components/Sidebar/LeftSidebar";
 import RightSidebar from "../../components/Sidebar/RightSidebar";
 import "./Explore.css";
 import RightSidebarDark from "../../components/RightSidebarDark/RightSidebarDark";
+import MiddleStuffDark from "../../components/MiddleStuffDark/MiddleStuffDark";
 
 const Explore = () => {
   const [theme, setTheme] = useState<string>("");
@@ -29,7 +30,7 @@ const Explore = () => {
       <main>
         <div className="container">
           {theme === "dark" ? <RightSidebarDark /> : <RightSidebar />}
-          <MiddleStuff />
+          {theme === "dark" ? <MiddleStuffDark /> : <MiddleStuff />}
           {theme === "dark" ? <LeftSidebarDark /> : <LeftSidebar />}
         </div>
       </main>

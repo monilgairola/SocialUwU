@@ -7,6 +7,7 @@ import LeftSidebar from "../../components/Sidebar/LeftSidebar";
 import RightSidebar from "../../components/Sidebar/RightSidebar";
 import "./Notifications.css";
 import RightSidebarDark from "../../components/RightSidebarDark/RightSidebarDark";
+import NotificationDark from "../../components/NotificationDark/NotificationDark";
 
 const Notifications = () => {
   const [theme, setTheme] = useState<string>("");
@@ -29,7 +30,11 @@ const Notifications = () => {
       <main>
         <div className="container">
           {theme === "dark" ? <RightSidebarDark /> : <RightSidebar />}
-          <NotificationsMiddleStuff />
+          {theme === "dark" ? (
+            <NotificationDark />
+          ) : (
+            <NotificationsMiddleStuff />
+          )}
           {theme === "dark" ? <LeftSidebarDark /> : <LeftSidebar />}
         </div>
       </main>
