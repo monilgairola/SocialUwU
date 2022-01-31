@@ -7,6 +7,9 @@ const SettingsMiddleStuff = () => {
   const [checked, setChecked] = useState<boolean>(false);
   const onChecked = () => {
     setChecked(!checked);
+    checked === true
+      ? localStorage.setItem("theme", "light")
+      : localStorage.setItem("theme", "dark");
   };
   return (
     <div className="settingmiddlestuff">
