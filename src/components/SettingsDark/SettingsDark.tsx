@@ -15,6 +15,7 @@ const SettingsDark = (props: Shit) => {
     checked === true
       ? localStorage.setItem("theme", "light")
       : localStorage.setItem("theme", "dark");
+    window.location.reload();
   };
   return (
     <div className="settingmiddlestuff">
