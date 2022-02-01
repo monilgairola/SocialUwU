@@ -24,6 +24,10 @@ const Explore = () => {
   useEffect(() => {
     document.title = "SocialUwU - Explore";
   }, []);
+  useEffect(() => {
+    document.body.style.backgroundColor =
+      theme === "dark" ? "#272729" : "#dae0e6";
+  }, [theme]);
   return (
     <div>
       {theme === "dark" ? <NavbarDark /> : <Navbar />}

@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Loader.css";
 
 const Loader = () => {
+  useEffect(() => {
+    document.title = "SocialUwU - Loading";
+  }, []);
   return (
     <div className="loaderboi">
       <img

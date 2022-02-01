@@ -24,6 +24,10 @@ const Notifications = () => {
   useEffect(() => {
     document.title = "SocialUwU - Notifications";
   }, []);
+  useEffect(() => {
+    document.body.style.backgroundColor =
+      theme === "dark" ? "#272729" : "#dae0e6";
+  }, [theme]);
   return (
     <div>
       {theme === "dark" ? <NavbarDark /> : <Navbar />}

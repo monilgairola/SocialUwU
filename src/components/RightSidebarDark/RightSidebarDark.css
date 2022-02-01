@@ -77,7 +77,7 @@
 }
 
 .sidebardark .home-sidebar-active {
-  background-color: #cfcfcf57;
+  background-color: #27272983;
   border-left: 0.3rem solid #6f53f3;
   border-top-left-radius: 1rem;
 }
@@ -88,7 +88,7 @@
 }
 
 .sidebardark .explore-sidebar-active {
-  background-color: #cfcfcf57;
+  background-color: #27272983;
   border-left: 0.3rem solid #6f53f3;
 }
 
@@ -98,7 +98,7 @@
 }
 
 .sidebardark .notification-sidebar-active {
-  background-color: #cfcfcf57;
+  background-color: #27272983;
   border-left: 0.3rem solid #6f53f3;
 }
 
@@ -108,7 +108,7 @@
 }
 
 .sidebardark .bookmarks-sidebar-active {
-  background-color: #cfcfcf57;
+  background-color: #27272983;
   border-left: 0.3rem solid #6f53f3;
 }
 
@@ -118,7 +118,7 @@
 }
 
 .sidebardark .settings-sidebar-active {
-  background-color: #cfcfcf57;
+  background-color: #27272983;
   border-left: 0.3rem solid #6f53f3;
   border-bottom-left-radius: 1rem;
 }
