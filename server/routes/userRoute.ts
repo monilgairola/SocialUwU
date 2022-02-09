@@ -38,14 +38,14 @@ router.post(
       const userbyemail = await User.findOne({ email });
       const userbyusername = await User.findOne({ username });
       if (userbyemail || userbyusername) {
-        res.status(400).json({
+        res.json({
           error: "username or email already exists",
         });
       } else {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-          res.status(400).json({
-            errors: errors.array(),
+          res.json({
+            error: errors.array()[0].msg,
           });
         } else {
           const userboi = await User.create({
@@ -58,7 +58,7 @@ router.post(
         }
       }
     } catch (error: any) {
-      res.status(500).send({
+      res.send({
         error: error.message,
       });
     }

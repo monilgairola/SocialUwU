@@ -3,11 +3,13 @@ import { useDispatch } from "react-redux";
 import "./Auth.css";
 import CircularProgress from "@mui/material/CircularProgress";
 import Tooltip from "@mui/material/Tooltip";
-import { login } from "../../actions/user";
+import { login, register } from "../../actions/user";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Auth: React.FC = () => {
+  const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -39,11 +41,12 @@ const Auth: React.FC = () => {
   const Login = (e: React.FormEvent) => {
     e.preventDefault();
     setreloadboi(true);
-    dispatch(login(loginData));
+    dispatch(login(loginData, navigate, setreloadboi));
   };
-  const register = (e: React.FormEvent) => {
+  const Register = (e: React.FormEvent) => {
     e.preventDefault();
     setreloadboi(true);
+    dispatch(register(registerData, navigate, setreloadboi));
   };
   return (
     <div>
@@ -91,7 +94,7 @@ const Auth: React.FC = () => {
               )}
             </form>
 
-            <form className="form__sign-up" onSubmit={register}>
+            <form className="form__sign-up" onSubmit={Register}>
               <h2 className="form__title">Sign Up</h2>
               <div className="form__input-field">
                 <i className="uil uil-user"></i>
