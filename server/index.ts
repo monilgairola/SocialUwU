@@ -10,7 +10,7 @@ const app: Express = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://socialuwu.netlify.app/",
+    origin: ["https://socialuwu.netlify.app/", "http://localhost:3000"],
   })
 );
 

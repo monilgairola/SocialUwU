@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import "./Auth.css";
 import CircularProgress from "@mui/material/CircularProgress";
 import Tooltip from "@mui/material/Tooltip";
+import { login } from "../../actions/user";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const Auth: React.FC = () => {
   const [loginData, setLoginData] = useState({
@@ -31,9 +35,11 @@ const Auth: React.FC = () => {
       document.title = "SocialUwU - Login";
     });
   }, []);
-  const login = (e: React.FormEvent) => {
+  const dispatch = useDispatch();
+  const Login = (e: React.FormEvent) => {
     e.preventDefault();
     setreloadboi(true);
+    dispatch(login(loginData));
   };
   const register = (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,7 +50,7 @@ const Auth: React.FC = () => {
       <div className="container">
         <div className="container__forms">
           <div className="form">
-            <form action="" className="form__sign-in" onSubmit={login}>
+            <form action="" className="form__sign-in" onSubmit={Login}>
               <h2 className="form__title">Sign In</h2>
               <div className="form__input-field">
                 <i className="uil uil-envelope"></i>
@@ -223,7 +229,7 @@ const Auth: React.FC = () => {
           </div>
         </div>
       </div>
-      {/* <ToastContainer /> */}
+      <ToastContainer />
     </div>
   );
 };

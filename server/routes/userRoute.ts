@@ -85,20 +85,20 @@ router.post(
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        res.status(400).json({
-          errors: errors.array(),
+        res.json({
+          error: errors.array()[0].msg,
         });
       } else {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
         if (!user) {
-          res.status(403).json({
+          res.json({
             error: "Invalid credentials",
           });
         } else {
           const hashedpass = await bcrypt.compare(password, user.password);
           if (!hashedpass) {
-            res.status(403).json({
+            res.json({
               error: "Invalid credentials",
             });
           } else {
@@ -119,7 +119,7 @@ router.post(
         }
       }
     } catch (error: any) {
-      res.status(500).send({
+      res.send({
         error: error.message,
       });
     }
