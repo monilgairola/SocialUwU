@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Auth.css";
+import CircularProgress from "@mui/material/CircularProgress";
+import Tooltip from "@mui/material/Tooltip";
 
 const Auth: React.FC = () => {
   const [loginData, setLoginData] = useState({
@@ -29,15 +31,23 @@ const Auth: React.FC = () => {
       document.title = "SocialUwU - Login";
     });
   }, []);
+  const login = (e: React.FormEvent) => {
+    e.preventDefault();
+    setreloadboi(true);
+  };
+  const register = (e: React.FormEvent) => {
+    e.preventDefault();
+    setreloadboi(true);
+  };
   return (
     <div>
       <div className="container">
         <div className="container__forms">
           <div className="form">
-            <form action="" className="form__sign-in">
+            <form action="" className="form__sign-in" onSubmit={login}>
               <h2 className="form__title">Sign In</h2>
               <div className="form__input-field">
-                <i className="fas fa-envelope"></i>
+                <i className="uil uil-envelope"></i>
                 <input
                   type="email"
                   placeholder="Email"
@@ -48,7 +58,7 @@ const Auth: React.FC = () => {
                 />
               </div>
               <div className="form__input-field">
-                <i className="fas fa-lock"></i>
+                <i className="uil uil-lock"></i>
                 <input
                   type="password"
                   placeholder="Password"
@@ -58,18 +68,27 @@ const Auth: React.FC = () => {
                   }
                 />
               </div>
-              {reloadboi ? (
-                // <CircularProgress />
-                <input className="form__submit" type="submit" value="Login" />
+              {loginData.email.includes("@") &&
+              loginData.password.trim().length >= 6 ? (
+                reloadboi ? (
+                  <CircularProgress />
+                ) : (
+                  <input className="form__submit" type="submit" value="Login" />
+                )
               ) : (
-                <input className="form__submit" type="submit" value="Login" />
+                <input
+                  className="form__submit_disabled"
+                  type="submit"
+                  value="Login"
+                  disabled
+                />
               )}
             </form>
 
-            <form className="form__sign-up">
+            <form className="form__sign-up" onSubmit={register}>
               <h2 className="form__title">Sign Up</h2>
               <div className="form__input-field">
-                <i className="fas fa-user"></i>
+                <i className="uil uil-user"></i>
                 <input
                   type="text"
                   placeholder="Username"
@@ -83,7 +102,7 @@ const Auth: React.FC = () => {
                 />
               </div>
               <div className="form__input-field">
-                <i className="fas fa-envelope"></i>
+                <i className="uil uil-envelope"></i>
                 <input
                   type="email"
                   placeholder="Email"
@@ -97,7 +116,7 @@ const Auth: React.FC = () => {
                 />
               </div>
               <div className="form__input-field">
-                <i className="fas fa-lock"></i>
+                <i className="uil uil-lock"></i>
                 <input
                   type="password"
                   placeholder="Password"
@@ -111,7 +130,7 @@ const Auth: React.FC = () => {
                 />
               </div>
               <div className="form__input-field">
-                <i className="fas fa-lock"></i>
+                <i className="uil uil-lock"></i>
                 <input
                   type="password"
                   placeholder="Confirm Password"
@@ -125,16 +144,13 @@ const Auth: React.FC = () => {
                 />
               </div>
               <div>
-                {registerData.username.length >= 3 &&
-                registerData.username.length <= 16 &&
-                registerData.password.length >= 8 &&
-                registerData.password === registerData.confirmpassword ? (
+                {registerData.username.trim().length >= 3 &&
+                registerData.username.trim().length <= 16 &&
+                registerData.password.trim().length >= 6 &&
+                registerData.password === registerData.confirmpassword &&
+                registerData.email.includes("@") ? (
                   reloadboi ? (
-                    <input
-                      className="form__submit"
-                      type="submit"
-                      value="Register"
-                    />
+                    <CircularProgress />
                   ) : (
                     <input
                       className="form__submit"
@@ -150,20 +166,24 @@ const Auth: React.FC = () => {
                     disabled
                   />
                 )}
-                {/* <Tooltip
-                  title="NOTE: username length must be greater than 3 letters and smoler than 16 letters,email should be valid and both password should match and must be greater than 8 letters"
-                  arrow
-                >
-                  <InfoOutlinedIcon
-                    color="action"
-                    style={{
-                      position: "relative",
-                      top: "10px",
-                      left: "20px",
-                      cursor: "pointer",
-                    }}
-                  />
-                </Tooltip> */}
+                {!reloadboi ? (
+                  <Tooltip
+                    title="NOTE: username length must be greater than 4 letters and smoler than 16 letters,email should be valid and both password should match and must be greater than 6 letters :cheemsdorime:"
+                    arrow
+                  >
+                    <i
+                      className="uil uil-info-circle"
+                      style={{
+                        cursor: "pointer",
+                        marginLeft: "2rem",
+                        fontSize: "1.3rem",
+                        color: "gray",
+                      }}
+                    ></i>
+                  </Tooltip>
+                ) : (
+                  ""
+                )}
               </div>{" "}
             </form>
           </div>
