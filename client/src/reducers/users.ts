@@ -6,7 +6,8 @@ type Action = {
 export const user = (state = { authData: null }, action: Action) => {
   switch (action.type) {
     case "LOGIN":
-      localStorage.setItem("token", JSON.stringify(action?.data));
+      return localStorage.setItem("token", JSON.stringify(action?.data));
+    case "GET_USER_BY_ID":
       return { ...state, authData: action?.data };
     default:
       return state;

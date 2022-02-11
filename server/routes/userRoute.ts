@@ -166,7 +166,7 @@ router.get("/getbyid/:userId", async (req: Request, res: Response) => {
     const userboi2 = omit(userboi?.toJSON(), "password");
     res.status(200).json(userboi2);
   } catch (error: any) {
-    res.status(500).send({
+    res.send({
       error: error.message,
     });
   }

@@ -19,6 +19,7 @@ export const login =
       });
       setreloadboi(false);
     } else {
+      window.location.href = "/";
       dispatch({
         type: "LOGIN",
         data,
@@ -56,5 +57,19 @@ export const register =
       });
       window.location.reload();
       setreloadboi(false);
+    }
+  };
+
+export const get_user_by_id =
+  (id: string, navigate: any) => async (dispatch: Dispatch) => {
+    const { data } = await api.get_user_by_id(id);
+    if (data.error) {
+      localStorage.removeItem("token");
+      window.location.href = "/auth";
+    } else {
+      dispatch({
+        type: "GET_USER_BY_ID",
+        data,
+      });
     }
   };
