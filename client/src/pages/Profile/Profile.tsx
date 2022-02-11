@@ -10,10 +10,14 @@ import RightSidebarDark from "../../components/RightSidebarDark/RightSidebarDark
 import RightSidebar from "../../components/Sidebar/RightSidebar";
 import ProfileMiddleStuffDark from "../../components/ProfileMiddleStuffDark/ProfileMiddleStuffDark";
 import ProfileMiddleStuff from "../../components/ProfileMiddleStuff/ProfileMiddleStuff";
+import { useParams } from "react-router-dom";
+import ProfileSidebarDark from "../../components/ProfileSidebarDark/ProfileSidebarDark";
+import ProfileSidebar from "../../components/ProfileSidebar/ProfileSidebar";
 
 const Profile: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const params = useParams();
   const [theme, setTheme] = useState<string>("");
   useEffect(() => {
     const themeboi = localStorage.getItem("theme");
@@ -49,6 +53,10 @@ const Profile: React.FC = () => {
       dispatch(get_user_by_id(userinfo?.user?._id, navigate));
     }
   }, [navigate, dispatch]);
+  useEffect(() => {
+    const { profileid } = params;
+    console.log(profileid);
+  }, [params]);
   return (
     <div>
       {theme === "dark" ? <NavbarDark /> : <Navbar />}
@@ -60,6 +68,7 @@ const Profile: React.FC = () => {
           ) : (
             <ProfileMiddleStuff />
           )}
+          {theme === "dark" ? <ProfileSidebarDark /> : <ProfileSidebar />}
         </div>
       </main>
     </div>
