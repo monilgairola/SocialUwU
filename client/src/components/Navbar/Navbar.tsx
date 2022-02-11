@@ -19,10 +19,14 @@ const Navbar: React.FC = () => {
   const dispatch = useDispatch();
   const logout = () => {
     handleClose();
-    navigate("/auth")
+    navigate("/auth");
     dispatch({
       type: "LOGOUT",
     });
+  };
+  const profileRedirect = () => {
+    navigate(`/profile/${user?._id}`);
+    handleClose();
   };
   return (
     <nav>
@@ -62,7 +66,7 @@ const Navbar: React.FC = () => {
         }}
       >
         <MenuItem
-          onClick={handleClose}
+          onClick={profileRedirect}
           style={{
             fontSize: "1.2rem",
             display: "flex",

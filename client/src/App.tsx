@@ -12,6 +12,7 @@ const App: React.FC = () => {
   const BookMarks = lazy(() => import("./pages/BookMarks/BookMarks"));
   const Settings = lazy(() => import("./pages/Settings/Settings"));
   const Auth = lazy(() => import("./pages/Auth/Auth"));
+  const Profile = lazy(() => import("./pages/Profile/Profile"));
   return (
     <Router>
       <Suspense fallback={<Loader />}>
@@ -22,6 +23,7 @@ const App: React.FC = () => {
           <Route path="/bookmarks" element={<BookMarks />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/profile/:profileid" element={<Profile />} />
         </Routes>
       </Suspense>
     </Router>
