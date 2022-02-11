@@ -1,3 +1,9 @@
+.profilesidebardark {
+  height: max-content;
+  position: sticky;
+  top: 5.4rem;
+}
+
 .profilesidebardark .profilesidebarboi {
   background-color: black;
   border-radius: 1rem;
