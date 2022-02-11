@@ -9,6 +9,8 @@ export const user = (state = { authData: null }, action: Action) => {
       return localStorage.setItem("token", JSON.stringify(action?.data));
     case "GET_USER_BY_ID":
       return { ...state, authData: action?.data };
+    case "LOGOUT":
+      return localStorage.removeItem("token");
     default:
       return state;
   }

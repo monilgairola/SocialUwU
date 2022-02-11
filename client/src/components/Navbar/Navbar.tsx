@@ -1,7 +1,29 @@
 import React from "react";
 import "./Navbar.css";
+import { Avatar, Tooltip, Menu, MenuItem, IconButton } from "@mui/material";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Navbar: React.FC = () => {
+  const navigate = useNavigate();
+  const userboi = useSelector((user: any) => user.user);
+  const user = userboi?.authData;
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const dispatch = useDispatch();
+  const logout = () => {
+    handleClose();
+    navigate("/auth")
+    dispatch({
+      type: "LOGOUT",
+    });
+  };
   return (
     <nav>
       <div className="container">
@@ -12,13 +34,70 @@ const Navbar: React.FC = () => {
         </div>
         <div className="leftstuff">
           <p className="create-btn">Create</p>
-          <img
-            alt=""
-            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.fetchfind.com%2Fblog%2Fwp-content%2Fuploads%2F2017%2F08%2Fcat-2734999_1920-5-common-cat-sounds.jpg&f=1&nofb=1"
-            className="pfp"
-          />
+          <Tooltip arrow title={user?.username}>
+            <IconButton
+              onClick={handleClick}
+              sx={{
+                padding: "2px",
+              }}
+            >
+              <Avatar
+                alt=""
+                sx={{
+                  width: 45,
+                  height: 45,
+                }}
+              />
+            </IconButton>
+          </Tooltip>
         </div>
       </div>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          "aria-labelledby": "basic-button",
+        }}
+      >
+        <MenuItem
+          onClick={handleClose}
+          style={{
+            fontSize: "1.2rem",
+            display: "flex",
+            gap: "0.4rem",
+            fontWeight: "bold",
+          }}
+        >
+          <i className="uil uil-user"></i>
+          Profile
+        </MenuItem>
+        <MenuItem
+          onClick={handleClose}
+          style={{
+            fontSize: "1.2rem",
+            display: "flex",
+            gap: "0.4rem",
+            fontWeight: "bold",
+          }}
+        >
+          <i className="uil uil-edit"></i>
+          Update Profile
+        </MenuItem>
+        <MenuItem
+          onClick={logout}
+          style={{
+            fontSize: "1.2rem",
+            display: "flex",
+            gap: "0.4rem",
+            fontWeight: "bold",
+          }}
+        >
+          <i className="uil uil-signout"></i>
+          Logout
+        </MenuItem>
+      </Menu>
     </nav>
   );
 };
