@@ -8,8 +8,14 @@ import "./Explore.css";
 import RightSidebarDark from "../../components/RightSidebarDark/RightSidebarDark";
 import ExploreMiddle from "../../components/ExploreMiddle/ExploreMiddle";
 import ExploreMiddleDark from "../../components/ExploreMiddleDark/ExploreMiddleDark";
+import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { get_user_by_id } from "../../actions/user";
 
 const Explore = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [theme, setTheme] = useState<string>("");
   console.log(theme === "dark");
   useEffect(() => {
@@ -28,6 +34,24 @@ const Explore = () => {
     document.body.style.backgroundColor =
       theme === "dark" ? "#272729" : "#dae0e6";
   }, [theme]);
+  useEffect(() => {
+    let token = [];
+    try {
+      //@ts-ignore
+      token = JSON.parse(localStorage.getItem("token"));
+    } catch (error) {
+      localStorage.removeItem("token");
+      window.location.href = "/auth";
+    }
+    if (!token) {
+      navigate("/auth");
+    } else {
+      const tokenboi = token?.token;
+      const userinfo = jwt_decode(tokenboi);
+      //@ts-ignore
+      dispatch(get_user_by_id(userinfo?.user?._id, navigate));
+    }
+  }, [navigate, dispatch]);
   return (
     <div>
       {theme === "dark" ? <NavbarDark /> : <Navbar />}

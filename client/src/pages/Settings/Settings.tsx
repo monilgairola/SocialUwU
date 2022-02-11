@@ -8,10 +8,15 @@ import RightSidebar from "../../components/Sidebar/RightSidebar";
 import "./Settings.css";
 import RightSidebarDark from "../../components/RightSidebarDark/RightSidebarDark";
 import SettingsDark from "../../components/SettingsDark/SettingsDark";
+import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { get_user_by_id } from "../../actions/user";
 
 const Settings = () => {
   const [theme, setTheme] = useState<string>("");
-  console.log(theme === "dark");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   useEffect(() => {
     const themeboi = localStorage.getItem("theme");
     if (!themeboi) {
@@ -28,6 +33,24 @@ const Settings = () => {
     document.body.style.backgroundColor =
       theme === "dark" ? "#272729" : "#dae0e6";
   }, [theme]);
+  useEffect(() => {
+    let token = [];
+    try {
+      //@ts-ignore
+      token = JSON.parse(localStorage.getItem("token"));
+    } catch (error) {
+      localStorage.removeItem("token");
+      window.location.href = "/auth";
+    }
+    if (!token) {
+      navigate("/auth");
+    } else {
+      const tokenboi = token?.token;
+      const userinfo = jwt_decode(tokenboi);
+      //@ts-ignore
+      dispatch(get_user_by_id(userinfo?.user?._id, navigate));
+    }
+  }, [navigate, dispatch]);
   return (
     <div>
       {theme === "dark" ? <NavbarDark /> : <Navbar />}

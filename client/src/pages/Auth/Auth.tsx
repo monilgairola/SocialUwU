@@ -48,6 +48,19 @@ const Auth: React.FC = () => {
     setreloadboi(true);
     dispatch(register(registerData, navigate, setreloadboi));
   };
+  useEffect(() => {
+    let token = [];
+    try {
+      //@ts-ignore
+      token = JSON.parse(localStorage.getItem("token"));
+    } catch (error) {
+      localStorage.removeItem("token");
+      window.location.href = "/";
+    }
+    if (token) {
+      window.location.href = "/";
+    }
+  }, [navigate, dispatch]);
   return (
     <div>
       <div className="container">
