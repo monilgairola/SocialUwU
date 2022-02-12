@@ -172,20 +172,6 @@ router.get("/getbyid/:userId", async (req: Request, res: Response) => {
   }
 });
 
-//get user by username
-router.get("/getbyusername/:userName", async (req: Request, res: Response) => {
-  const { userName } = req.params;
-  try {
-    const userboi = await User.findOne({ username: userName.trim() });
-    const userboi2 = omit(userboi?.toJSON(), "password");
-    res.status(200).json(userboi2);
-  } catch (error: any) {
-    res.status(500).send({
-      error: error.message,
-    });
-  }
-});
-
 //folllow user
 router.put(
   "/follow/:userId",

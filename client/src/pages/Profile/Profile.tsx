@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./Profile.css";
 import jwt_decode from "jwt-decode";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { get_user_by_id } from "../../actions/user";
 import NavbarDark from "../../components/NavbarDark/NavbarDark";
 import Navbar from "../../components/Navbar/Navbar";
@@ -10,9 +10,11 @@ import RightSidebarDark from "../../components/RightSidebarDark/RightSidebarDark
 import RightSidebar from "../../components/Sidebar/RightSidebar";
 import ProfileMiddleStuffDark from "../../components/ProfileMiddleStuffDark/ProfileMiddleStuffDark";
 import ProfileMiddleStuff from "../../components/ProfileMiddleStuff/ProfileMiddleStuff";
-import { useParams } from "react-router-dom";
 import ProfileSidebarDark from "../../components/ProfileSidebarDark/ProfileSidebarDark";
 import ProfileSidebar from "../../components/ProfileSidebar/ProfileSidebar";
+import { getProfile } from "../../actions/profile";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Profile: React.FC = () => {
   const navigate = useNavigate();
@@ -55,8 +57,9 @@ const Profile: React.FC = () => {
   }, [navigate, dispatch]);
   useEffect(() => {
     const { profileid } = params;
-    console.log(profileid);
-  }, [params]);
+    dispatch(getProfile(profileid as string));
+  }, [params, dispatch]);
+  const { profileData } = useSelector((profile: any) => profile.profile);
   return (
     <div>
       {theme === "dark" ? <NavbarDark /> : <Navbar />}
@@ -68,9 +71,14 @@ const Profile: React.FC = () => {
           ) : (
             <ProfileMiddleStuff />
           )}
-          {theme === "dark" ? <ProfileSidebarDark /> : <ProfileSidebar />}
+          {theme === "dark" ? (
+            <ProfileSidebarDark profileData={profileData} />
+          ) : (
+            <ProfileSidebar profileData={profileData} />
+          )}
         </div>
       </main>
+      <ToastContainer />
     </div>
   );
 };

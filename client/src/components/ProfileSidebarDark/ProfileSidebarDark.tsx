@@ -1,14 +1,21 @@
 import React from "react";
 import "./ProfileSidebarDark.css";
 import { Avatar, Tooltip, Button } from "@mui/material";
+import { useSelector } from "react-redux";
 
-const ProfileSidebarDark = () => {
+interface Shit {
+  profileData: any;
+}
+
+const ProfileSidebarDark = (props: Shit) => {
+  const profileData = props.profileData;
+  const { authData } = useSelector((user: any) => user.user);
   return (
     <div className="profilesidebardark">
       <div className="profilesidebarboi">
         <div className="body">
           <div className="stuff">
-            <Tooltip title="Varun" arrow>
+            <Tooltip title={profileData?.username} arrow>
               <Avatar
                 alt=""
                 style={{
@@ -20,25 +27,28 @@ const ProfileSidebarDark = () => {
                 }}
               />
             </Tooltip>
-            <h1>Varun</h1>
-            <p>
-              Proffesional dumbass :) idiot piece of shit and many more stuff
-              lol lol lol
-            </p>
+            <h1>{profileData?.username}</h1>
+            <p>{profileData?.bio}</p>
             <div className="stats">
               <div>
                 <h6>Followers</h6>
-                <p>69</p>
+                <p>{profileData?.followers?.length}</p>
               </div>
               <div>
                 <h6>Following</h6>
-                <p>420</p>
+                <p>{profileData?.following?.length}</p>
               </div>
             </div>
-            <div className="buttons">
-              <Button variant="outlined">Follow</Button>
-              <Button variant="outlined">Message</Button>
-            </div>
+            {authData?._id === profileData?._id ? (
+              <div className="buttons">
+                <Button variant="outlined">Update Profile</Button>
+              </div>
+            ) : (
+              <div className="buttons">
+                <Button variant="outlined">Follow</Button>
+                <Button variant="outlined">Message</Button>
+              </div>
+            )}
           </div>
         </div>
       </div>
