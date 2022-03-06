@@ -120,10 +120,10 @@ const ProfileSidebarDark = (props: Shit) => {
                   {profileData?.followers?.includes(authData?._id) ? "Unfollow" : "Follow"}
                 </Button> : <CircularProgress /> : <Skeleton animation="wave" variant="text" width={100} height={40} style={{
                   marginTop: "5px"
-                }} />}
+                }} sx={{ bgcolor: 'grey.900' }} />}
                 {profileData ? <Button variant="outlined">Message</Button> : <Skeleton animation="wave" variant="text" width={100} height={40} style={{
                   marginTop: "5px"
-                }} />}
+                }} sx={{ bgcolor: 'grey.900' }} />}
               </div>
             )}
           </div>

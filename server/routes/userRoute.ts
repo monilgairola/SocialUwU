@@ -130,6 +130,7 @@ router.post(
 router.put(
   "/update_profile",
   body("email").isEmail().withMessage("email must be valid"),
+  body("username").exists().withMessage("username is required"),
   isAuthenticated,
   async (req: Request, res: Response) => {
     const { username, email, bio } = req.body;
@@ -138,7 +139,7 @@ router.put(
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         res.status(400).json({
-          errors: errors.array(),
+          errors: errors.array()[0].msg,
         });
       } else {
         await User.findByIdAndUpdate(userId, {
