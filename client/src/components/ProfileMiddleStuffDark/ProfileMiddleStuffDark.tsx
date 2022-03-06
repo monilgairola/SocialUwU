@@ -25,7 +25,7 @@ const ProfileMiddleStuffDark: React.FC = () => {
             fontSize: "1.7rem",
             lineHeight: "3rem"
           }}>Oh no seems like this idiot has no posts tell him to create posts or ︻デ═一</p>
-          <img src="https://cdn.discordapp.com/emojis/838743826784845874.png?size=96&quality=lossless" alt="" style={{
+          <img src="/ohno.png" alt="" style={{
             width: "100px",
             height: "100px"
           }} />

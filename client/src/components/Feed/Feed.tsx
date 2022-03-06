@@ -1,20 +1,51 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Avatar, Tooltip } from "@mui/material";
 import "./Feed.css";
+import { format } from "timeago.js"
+import axios from "axios";
+import { useNavigate } from "react-router-dom"
 
-const Feed = () => {
+type Props = {
+  posts: any,
+}
+
+type UserType = {
+  username: string
+  email: string
+  _id: number
+}
+
+const Feed = (props: Props) => {
+  const navigate = useNavigate();
+  const [postUser, setPostUser] = useState<UserType>({
+    username: "",
+    email: "",
+    _id: 0
+  })
+  useEffect(() => {
+    axios.get(`https://socialuwu.herokuapp.com/api/users/getbyid/${props?.posts?.userId}`).then((response) => {
+      setPostUser(response.data);
+    })
+  }, [axios])
+  const profileRedirect = () => {
+    navigate("/profile/" + postUser?._id);
+  }
   return (
     <div className="feed">
       <div className="header">
         <div className="user">
           <div className="pfpboi">
-            <img
-              alt=""
-              src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.fetchfind.com%2Fblog%2Fwp-content%2Fuploads%2F2017%2F08%2Fcat-2734999_1920-5-common-cat-sounds.jpg&f=1&nofb=1"
-            />
+            <Tooltip title={postUser?.username}>
+              <Avatar src="" alt="" sx={{
+                width: 48,
+                height: 48,
+                cursor: "pointer"
+              }} onClick={profileRedirect} />
+            </Tooltip>
           </div>
           <div className="userinfo">
-            <h3>Idiot</h3>
-            <small>69 minutes ago</small>
+            <h3>{postUser?.username}</h3>
+            <small>{format(props?.posts?.createdAt)}</small>
           </div>
         </div>
         <span className="edit">
@@ -24,17 +55,37 @@ const Feed = () => {
       <div className="image">
         <img
           alt=""
-          src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.fetchfind.com%2Fblog%2Fwp-content%2Fuploads%2F2017%2F08%2Fcat-2734999_1920-5-common-cat-sounds.jpg&f=1&nofb=1"
+          src={props?.posts?.image}
         />
       </div>
       <div className="buttons">
         <div className="rightbuttons">
-          <span>
-            <i className="uil uil-heart"></i>
-          </span>
-          <span>
-            <i className="uil uil-comment"></i>
-          </span>
+          <div style={{
+            display: "flex",
+            alignItems: "center",
+            marginRight: "10px"
+          }}>
+            <span>
+              <i className="uil uil-heart"></i>
+            </span>
+            <p style={{
+              color: "black",
+              fontSize: "16px"
+            }}>{props?.posts?.likes?.length}</p>
+          </div>
+          <div style={{
+            display: "flex",
+            alignItems: "center",
+            marginRight: "10px"
+          }}>
+            <span>
+              <i className="uil uil-comment"></i>
+            </span>
+            <p style={{
+              color: "black",
+              fontSize: "16px"
+            }}>{props?.posts?.comments?.length}</p>
+          </div>
           <span>
             <i className="uil uil-share-alt"></i>
           </span>
@@ -47,7 +98,7 @@ const Feed = () => {
       </div>
       <div className="caption">
         <span>
-          <b>Idiot</b> Suck my nuts :)
+          {props?.posts?.caption}
         </span>
       </div>
       <p className="viewcomments">View all comments</p>
