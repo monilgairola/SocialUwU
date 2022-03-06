@@ -1,20 +1,31 @@
+import { Avatar, Tooltip } from "@mui/material";
 import React from "react";
 import "./FeedDark.css";
+import { format } from "timeago.js"
 
-const FeedDark = () => {
+type Props = {
+  posts: any,
+}
+
+const FeedDark = (props: Props) => {
   return (
     <div className="feeddark">
       <div className="header">
-        <div className="user">
+        <div className="user" style={{
+          gap: "9px"
+        }}>
           <div className="pfpboi">
-            <img
-              alt=""
-              src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.fetchfind.com%2Fblog%2Fwp-content%2Fuploads%2F2017%2F08%2Fcat-2734999_1920-5-common-cat-sounds.jpg&f=1&nofb=1"
-            />
+            <Tooltip title="Idiot">
+              <Avatar src="" alt="" sx={{
+                width: 48,
+                height: 48,
+                cursor: "pointer"
+              }} />
+            </Tooltip>
           </div>
           <div className="userinfo">
             <h3>Idiot</h3>
-            <small>69 minutes ago</small>
+            <small>{format(props?.posts?.createdAt)}</small>
           </div>
         </div>
         <span className="edit">
@@ -24,7 +35,7 @@ const FeedDark = () => {
       <div className="image">
         <img
           alt=""
-          src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.fetchfind.com%2Fblog%2Fwp-content%2Fuploads%2F2017%2F08%2Fcat-2734999_1920-5-common-cat-sounds.jpg&f=1&nofb=1"
+          src={props?.posts?.image}
         />
       </div>
       <div className="buttons">
@@ -47,7 +58,7 @@ const FeedDark = () => {
       </div>
       <div className="caption">
         <span>
-          <b>Idiot</b> Suck my nuts :)
+          {props?.posts?.caption}
         </span>
       </div>
       <p className="viewcomments">View all comments</p>

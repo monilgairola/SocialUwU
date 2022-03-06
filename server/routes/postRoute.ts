@@ -39,7 +39,7 @@ router.post(
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         res.status(400).json({
-          errors: errors.array(),
+          errors: errors.array()[0].msg,
         });
       } else {
         const postboi = await Post.create({
@@ -192,7 +192,7 @@ router.put(
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         res.status(400).json({
-          errors: errors.array(),
+          errors: errors.array()[0].msg,
         });
       } else {
         const post = await Post.findById(postId);
@@ -230,7 +230,7 @@ router.post(
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         res.status(400).json({
-          errors: errors.array(),
+          errors: errors.array()[0].msg,
         });
       } else {
         const post = await Post.findById(postId);

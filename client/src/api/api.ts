@@ -18,3 +18,4 @@ export const follow_user = (id: any, token: any) => API.put(`/api/users/follow/$
     "token": token
   }
 })
+export const get_posts = () => API.get(`/api/posts`);

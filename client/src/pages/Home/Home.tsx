@@ -10,8 +10,9 @@ import "./Home.css";
 import MiddleStuffDark from "../../components/MiddleStuffDark/MiddleStuffDark";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { get_user_by_id } from "../../actions/user";
+import { getPosts } from "../../actions/posts";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -51,6 +52,9 @@ const Home = () => {
       dispatch(get_user_by_id(userinfo?.user?._id, navigate));
     }
   }, [navigate, dispatch]);
+  useEffect(() => {
+    dispatch(getPosts())
+  }, [])
   return (
     <div>
       {theme === "dark" ? <NavbarDark /> : <Navbar />}
