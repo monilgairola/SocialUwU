@@ -68,3 +68,35 @@ export const getUserPosts = (id: string) => async (dispatch: Dispatch) => {
         })
     }
 }
+
+export const deletePost = (id: string, token: any) => async (dispatch: Dispatch) => {
+    const { data } = await api.delete_post(id, token)
+    if (data.error) {
+        toast.error(data.error, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+    }
+    else {
+        toast.success("Post deleted succesfully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+        dispatch({
+            type: "DELETE_POST",
+            data,
+        })
+    }
+}

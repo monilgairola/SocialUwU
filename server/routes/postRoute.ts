@@ -156,9 +156,8 @@ router.delete(
       const post = await Post.findById(postId);
       if (post.userId === res.locals.user._id) {
         await Post.findByIdAndDelete(postId);
-        res.status(200).json({
-          message: "Post deleted",
-        });
+        const posts = await Post.find().sort({ createdAt: -1 });
+        res.status(200).json(posts);
       } else {
         res.status(403).send({
           error: "You can't delete other posts",

@@ -4,6 +4,11 @@ import "./FeedDark.css";
 import { format } from "timeago.js"
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux";
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { deletePost } from "../../actions/posts"
+
 
 type Props = {
   posts: any,
@@ -16,6 +21,7 @@ type UserType = {
 }
 
 const FeedDark = (props: Props) => {
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const [postUser, setPostUser] = useState<UserType>({
     username: "",
@@ -29,6 +35,25 @@ const FeedDark = (props: Props) => {
   }, [axios])
   const profileRedirect = () => {
     navigate("/profile/" + postUser?._id);
+  }
+  const userboi = useSelector((user: any) => user?.user?.authData);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  //@ts-ignore
+  const token = JSON.parse(localStorage.getItem("token"));
+  //@ts-ignore  
+  const tokenboi = token?.token
+
+  const deletePostboi = () => {
+    handleClose()
+    dispatch(deletePost(props?.posts?._id, tokenboi))
   }
   return (
     <>
@@ -51,9 +76,9 @@ const FeedDark = (props: Props) => {
               <small>{format(props?.posts?.createdAt)}</small>
             </div>
           </div>
-          <span className="edit">
+          {props?.posts?.userId === userboi?._id ? <span className="edit" onClick={handleClick}>
             <i className="uil uil-ellipsis-v"></i>
-          </span>
+          </span> : ""}
         </div>
         <div className="image">
           <img
@@ -106,6 +131,47 @@ const FeedDark = (props: Props) => {
         </div>
         <p className="viewcomments">View all comments</p>
       </div>
+      {/* edit delete menu  */}
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem onClick={handleClose} style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "0.5rem"
+        }}>
+          <i className="uil uil-edit" style={{
+            fontSize: "1.2rem",
+            color: "#1d94d6"
+          }}></i>
+          <p style={{
+            fontSize: "1rem",
+            fontWeight: "bold",
+            color: "#1d94d6"
+          }}>Edit Post</p>
+        </MenuItem>
+        <MenuItem onClick={deletePostboi} style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "0.5rem",
+        }}>
+          <i className="uil uil-trash-alt" style={{
+            fontSize: "1.2rem",
+            color: "#d74545"
+          }}></i>
+          <p style={{
+            fontSize: "1rem",
+            fontWeight: "bold",
+            color: "#d74545"
+          }}>Delete Post</p>
+        </MenuItem>
+      </Menu>
     </>
   );
 };
