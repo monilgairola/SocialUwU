@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ProfileSidebar.css";
 import { Avatar, Tooltip, Button, IconButton, TextField, Skeleton } from "@mui/material";
 import { useSelector } from "react-redux";
@@ -8,6 +8,8 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { useDispatch } from "react-redux";
+import { updateProfile } from "../../actions/profile"
 
 interface Shit {
   profileData: any;
@@ -18,6 +20,19 @@ const ProfileSidebar = (props: Shit) => {
   const profileData = props.profileData;
   const { authData } = useSelector((user: any) => user.user);
   const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch()
+
+  type updateProfileDataType = {
+    username: string;
+    email: string;
+    bio: string;
+  }
+
+  const [updateProfileData, setUpdateProfileData] = useState<updateProfileDataType>({
+    username: authData?.username,
+    email: authData?.email,
+    bio: authData?.bio
+  })
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -26,6 +41,16 @@ const ProfileSidebar = (props: Shit) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  //@ts-ignore
+  const token = JSON.parse(localStorage.getItem("token"));
+  //@ts-ignore  
+  const tokenboi = token?.token
+
+  const updateProfileboi = () => {
+    handleClose()
+    dispatch(updateProfile(updateProfileData, tokenboi))
+  }
 
   return (
     <div className="profilesidebar">
@@ -117,6 +142,8 @@ const ProfileSidebar = (props: Shit) => {
                 width: "100%",
                 marginTop: "1rem",
               }}
+              defaultValue={updateProfileData.username}
+              onChange={(e) => setUpdateProfileData({ ...updateProfileData, username: e.target.value })}
             />
             <TextField
               id="outlined-basic"
@@ -126,6 +153,8 @@ const ProfileSidebar = (props: Shit) => {
                 width: "100%",
                 marginTop: "1rem",
               }}
+              defaultValue={updateProfileData.email}
+              onChange={(e) => setUpdateProfileData({ ...updateProfileData, email: e.target.value })}
             />
             <TextField
               id="outlined-basic"
@@ -137,11 +166,14 @@ const ProfileSidebar = (props: Shit) => {
               }}
               multiline
               rows={4}
+              defaultValue={updateProfileData.bio}
+              onChange={(e) => setUpdateProfileData({ ...updateProfileData, bio: e.target.value })}
             />
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Create</Button>
+          {updateProfileData?.username?.length <= 3 &&
+            updateProfileData?.username?.length >= 16 && !updateProfileData?.email?.includes("@") ? <Button disabled>Update</Button> : <Button onClick={updateProfileboi}>Update</Button>}
         </DialogActions>
       </Dialog>
     </div>

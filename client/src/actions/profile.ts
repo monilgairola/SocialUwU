@@ -23,3 +23,34 @@ export const getProfile = (id: string) => async (dispatch: Dispatch) => {
     });
   }
 };
+
+export const updateProfile = (databoi: any, token: any) => async (dispatch: Dispatch) => {
+  const { data } = await api.update_profile(databoi, token);
+  if (data.error) {
+    toast.error(data.error, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  } else {
+    toast.success("Profile updated it can take some time to take effect", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+    dispatch({
+      type: "UPDATE_PROFILE",
+      data,
+    });
+  }
+}

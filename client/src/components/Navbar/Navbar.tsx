@@ -79,7 +79,7 @@ const Navbar: React.FC = () => {
           Profile
         </MenuItem>
         <MenuItem
-          onClick={handleClose}
+          onClick={profileRedirect}
           style={{
             fontSize: "1.2rem",
             display: "flex",

@@ -53,7 +53,7 @@ const NavbarDark: React.FC = () => {
                 }}
               />
             </IconButton>
-          </Tooltip> : <Skeleton animation="wave" variant="circular" width={50} height={50} />}
+          </Tooltip> : <Skeleton animation="wave" variant="circular" width={50} height={50} sx={{ bgcolor: 'grey.900' }} />}
         </div>
       </div>
       <Menu
@@ -78,7 +78,7 @@ const NavbarDark: React.FC = () => {
           Profile
         </MenuItem>
         <MenuItem
-          onClick={handleClose}
+          onClick={profileRedirect}
           style={{
             fontSize: "1.2rem",
             display: "flex",
