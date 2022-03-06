@@ -13,3 +13,8 @@ export const update_profile = (data: any, token: any) => API.put(`/api/users/upd
     "token": token
   }
 });
+export const follow_user = (id: any, token: any) => API.put(`/api/users/follow/${id}`, {}, {
+  headers: {
+    "token": token
+  }
+})

@@ -9,7 +9,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useDispatch } from "react-redux";
-import { updateProfile } from "../../actions/profile"
+import { followUser, updateProfile } from "../../actions/profile"
 
 interface Shit {
   profileData: any;
@@ -50,6 +50,11 @@ const ProfileSidebar = (props: Shit) => {
   const updateProfileboi = () => {
     handleClose()
     dispatch(updateProfile(updateProfileData, tokenboi))
+  }
+
+  const followBoi = () => {
+    //@ts-ignore
+    dispatch(followUser(profileData._id, tokenboi))
   }
 
   return (
@@ -103,7 +108,9 @@ const ProfileSidebar = (props: Shit) => {
               </div>
             ) : (
               <div className="buttons">
-                {profileData ? <Button variant="outlined">Follow</Button> : <Skeleton animation="wave" variant="text" width={100} height={40} style={{
+                {profileData ? <Button variant="outlined" onClick={followBoi}>
+                  {profileData?.followers?.includes(authData?._id) ? "Unfollow" : "Follow"}
+                </Button> : <Skeleton animation="wave" variant="text" width={100} height={40} style={{
                   marginTop: "5px"
                 }} />}
                 {profileData ? <Button variant="outlined">Message</Button> : <Skeleton animation="wave" variant="text" width={100} height={40} style={{
