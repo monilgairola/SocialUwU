@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { deletePost } from "../../actions/posts"
+import { deletePost, likePost } from "../../actions/posts"
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -87,6 +87,10 @@ const FeedDark = (props: Props) => {
     })
   }
 
+  const likePostBoi = () => {
+    dispatch(likePost(props?.posts?._id, tokenboi))
+  }
+
   return (
     <>
       <div className="feeddark">
@@ -125,7 +129,7 @@ const FeedDark = (props: Props) => {
               alignItems: "center",
               marginRight: "10px"
             }}>
-              <span>
+              <span onClick={likePostBoi}>
                 <i className="uil uil-heart"></i>
               </span>
               <p style={{

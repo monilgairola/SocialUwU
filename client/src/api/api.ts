@@ -26,3 +26,8 @@ export const delete_post = (id: string, token: any) => API.delete(`/api/posts/${
     "token": token
   }
 })
+export const like_post = (id: string, token: any) => API.put(`/api/posts/like/${id}`, {}, {
+  headers: {
+    "token": token
+  }
+})
