@@ -91,7 +91,7 @@ const Auth: React.FC = () => {
                 />
               </div>
               {loginData.email.includes("@") &&
-              loginData.password.trim().length >= 6 ? (
+                loginData.password.trim().length >= 6 ? (
                 reloadboi ? (
                   <CircularProgress />
                 ) : (
@@ -167,10 +167,10 @@ const Auth: React.FC = () => {
               </div>
               <div>
                 {registerData.username.trim().length >= 3 &&
-                registerData.username.trim().length <= 16 &&
-                registerData.password.trim().length >= 6 &&
-                registerData.password === registerData.confirmpassword &&
-                registerData.email.includes("@") ? (
+                  registerData.username.trim().length <= 16 &&
+                  registerData.password.trim().length >= 6 &&
+                  registerData.password === registerData.confirmpassword &&
+                  registerData.email.includes("@") ? (
                   reloadboi ? (
                     <CircularProgress />
                   ) : (

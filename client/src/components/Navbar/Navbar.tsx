@@ -3,6 +3,7 @@ import "./Navbar.css";
 import { Avatar, Tooltip, Menu, MenuItem, IconButton } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Skeleton } from "@mui/material";
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const Navbar: React.FC = () => {
         </div>
         <div className="leftstuff">
           <p className="create-btn">Create</p>
-          <Tooltip arrow title={user?.username}>
+          {user ? <Tooltip arrow title={user?.username}>
             <IconButton
               onClick={handleClick}
               sx={{
@@ -53,7 +54,7 @@ const Navbar: React.FC = () => {
                 }}
               />
             </IconButton>
-          </Tooltip>
+          </Tooltip> : <Skeleton animation="wave" variant="circular" width={50} height={50} />}
         </div>
       </div>
       <Menu

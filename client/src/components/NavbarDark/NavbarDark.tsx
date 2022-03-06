@@ -1,6 +1,6 @@
 import "./NavbarDark.css";
 import React from "react";
-import { Avatar, Tooltip, Menu, MenuItem, IconButton } from "@mui/material";
+import { Avatar, Tooltip, Menu, MenuItem, IconButton, Skeleton } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -38,7 +38,7 @@ const NavbarDark: React.FC = () => {
         </div>
         <div className="leftstuffdark">
           <p className="create-btn">Create</p>
-          <Tooltip arrow title={user?.username}>
+          {user ? <Tooltip arrow title={user?.username}>
             <IconButton
               onClick={handleClick}
               sx={{
@@ -53,7 +53,7 @@ const NavbarDark: React.FC = () => {
                 }}
               />
             </IconButton>
-          </Tooltip>
+          </Tooltip> : <Skeleton animation="wave" variant="circular" width={50} height={50} />}
         </div>
       </div>
       <Menu

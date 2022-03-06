@@ -1,6 +1,6 @@
 import React from "react";
 import "./ProfileSidebarDark.css";
-import { Avatar, Tooltip, Button, IconButton, TextField } from "@mui/material";
+import { Avatar, Tooltip, Button, IconButton, TextField, Skeleton } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Dialog from "@mui/material/Dialog";
@@ -31,7 +31,7 @@ const ProfileSidebarDark = (props: Shit) => {
       <div className="profilesidebarboi">
         <div className="body">
           <div className="stuff">
-            <Tooltip title={profileData?.username} arrow>
+            {profileData ? <Tooltip title={profileData?.username} arrow>
               <Avatar
                 alt=""
                 style={{
@@ -42,29 +42,48 @@ const ProfileSidebarDark = (props: Shit) => {
                   borderRadius: "50%",
                 }}
               />
-            </Tooltip>
-            <h1>{profileData?.username}</h1>
-            <p>{profileData?.bio}</p>
+            </Tooltip> : <Skeleton animation="wave" variant="circular" width={200} height={200} sx={{ bgcolor: 'grey.900' }}
+            />}
+            {profileData ? <h1>{profileData?.username}</h1> : <Skeleton animation="wave" variant="text" width={140} height={30} style={{
+              marginTop: "5px"
+            }} sx={{ bgcolor: 'grey.900' }} />}
+            {profileData ? <p>{profileData?.bio}</p> : <Skeleton animation="wave" variant="text" width={190} height={40} style={{
+              marginTop: "5px"
+            }} sx={{ bgcolor: 'grey.900' }} />}
             <div className="stats">
               <div>
-                <h6>Followers</h6>
-                <p>{profileData?.followers?.length}</p>
+                {profileData ? <h6>Followers</h6> : <Skeleton animation="wave" variant="text" width={90} height={20} style={{
+                  marginTop: "5px"
+                }} sx={{ bgcolor: 'grey.900' }} />}
+                {profileData ? <p>{profileData?.followers?.length}</p> : <Skeleton animation="wave" variant="text" width={50} height={20} style={{
+                  marginTop: "5px"
+                }} sx={{ bgcolor: 'grey.900' }} />}
               </div>
               <div>
-                <h6>Following</h6>
-                <p>{profileData?.following?.length}</p>
+                {profileData ? <h6>Following</h6> : <Skeleton animation="wave" variant="text" width={90} height={20} style={{
+                  marginTop: "5px"
+                }} sx={{ bgcolor: 'grey.900' }} />}
+                {profileData ? <p>{profileData?.following?.length}</p> : <Skeleton animation="wave" variant="text" width={50} height={20} style={{
+                  marginTop: "5px"
+                }} sx={{ bgcolor: 'grey.900' }} />}
               </div>
             </div>
             {authData?._id === profileData?._id ? (
               <div className="buttons">
-                <Button variant="outlined" onClick={handleClickOpen}>
+                {profileData ? <Button variant="outlined" onClick={handleClickOpen}>
                   Update Profile
-                </Button>
+                </Button> : <Skeleton animation="wave" variant="text" width={200} height={40} style={{
+                  marginTop: "5px"
+                }} sx={{ bgcolor: 'grey.900' }} />}
               </div>
             ) : (
               <div className="buttons">
-                <Button variant="outlined">Follow</Button>
-                <Button variant="outlined">Message</Button>
+                {profileData ? <Button variant="outlined">Follow</Button> : <Skeleton animation="wave" variant="text" width={100} height={40} style={{
+                  marginTop: "5px"
+                }} sx={{ bgcolor: 'grey.900' }} />}
+                {profileData ? <Button variant="outlined">Message</Button> : <Skeleton animation="wave" variant="text" width={100} height={40} style={{
+                  marginTop: "5px"
+                }} sx={{ bgcolor: 'grey.900' }} />}
               </div>
             )}
           </div>
