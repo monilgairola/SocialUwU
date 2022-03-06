@@ -8,6 +8,14 @@ import { useSelector, useDispatch } from "react-redux";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { deletePost } from "../../actions/posts"
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from "@mui/material/Button"
+import Checkbox from '@mui/material/Checkbox';
+import { toast } from "react-toastify";
 
 
 type Props = {
@@ -55,6 +63,30 @@ const FeedDark = (props: Props) => {
     handleClose()
     dispatch(deletePost(props?.posts?._id, tokenboi))
   }
+  const [openreport, setOpenreport] = React.useState(false);
+
+  const handleClickOpenreport = () => {
+    setOpenreport(true);
+  };
+
+  const handleClosereport = () => {
+    setOpenreport(false);
+  };
+
+  const reportPost = () => {
+    handleClosereport()
+    toast.success("Post Reported", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    })
+  }
+
   return (
     <>
       <div className="feeddark">
@@ -114,8 +146,8 @@ const FeedDark = (props: Props) => {
                 fontSize: "16px"
               }}>{props?.posts?.comments?.length}</p>
             </div>
-            <span>
-              <i className="uil uil-share-alt"></i>
+            <span onClick={handleClickOpenreport}>
+              <i className="uil uil-megaphone"></i>
             </span>
           </div>
           <div className="leftbuttons">
@@ -172,6 +204,52 @@ const FeedDark = (props: Props) => {
           }}>Delete Post</p>
         </MenuItem>
       </Menu>
+      {/* report dialog */}
+      <Dialog
+        open={openreport}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Report Post"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description" style={{
+            width: "100%",
+            display: "flex",
+            gap: "1rem",
+            flexDirection: "column"
+          }}>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Checkbox />
+              <p>He/She copied my post :uganda:</p>
+            </div>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Checkbox defaultChecked disabled />
+              <p>Shit post</p>
+            </div>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Checkbox />
+              <p>Siuuuuuuuuuuuuuuu</p>
+            </div>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Checkbox />
+              <p>Wait you dont know what karlson is ?</p>
+            </div>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Checkbox />
+              <p>Idk what i am doing with my lyfe help</p>
+            </div>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClosereport}>Close</Button>
+          <Button onClick={reportPost}>
+            Report
+          </Button>
+        </DialogActions>
+      </Dialog>
+
     </>
   );
 };
