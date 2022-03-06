@@ -12,12 +12,12 @@ import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { get_user_by_id } from "../../actions/user";
+import { getTrendingPosts } from "../../actions/posts";
 
 const Explore = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [theme, setTheme] = useState<string>("");
-  console.log(theme === "dark");
   useEffect(() => {
     const themeboi = localStorage.getItem("theme");
     if (!themeboi) {

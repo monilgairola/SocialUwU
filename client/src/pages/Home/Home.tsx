@@ -52,9 +52,6 @@ const Home = () => {
       dispatch(get_user_by_id(userinfo?.user?._id, navigate));
     }
   }, [navigate, dispatch]);
-  useEffect(() => {
-    dispatch(getPosts())
-  }, [])
   return (
     <div>
       {theme === "dark" ? <NavbarDark /> : <Navbar />}

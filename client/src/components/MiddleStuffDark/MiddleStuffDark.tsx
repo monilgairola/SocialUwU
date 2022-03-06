@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./MiddleStuffDark.css";
 import FeedDark from "../FeedDark/FeedDark";
 import { Avatar } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getPosts } from "../../actions/posts";
 
 const MiddleStuffDark = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getPosts())
+  }, [dispatch])
   const posts = useSelector((posts: any) => posts.posts.postsData);
   return (
     <div>

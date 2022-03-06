@@ -19,3 +19,5 @@ export const follow_user = (id: any, token: any) => API.put(`/api/users/follow/$
   }
 })
 export const get_posts = () => API.get(`/api/posts`);
+export const get_trending_posts = () => API.get(`/api/posts/trending`);
+export const get_user_posts = (id: string) => API.get(`/api/posts/userposts/${id}`)
