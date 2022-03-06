@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ProfileSidebarDark.css";
-import { Avatar, Tooltip, Button, IconButton, TextField, Skeleton } from "@mui/material";
+import { Avatar, Tooltip, Button, IconButton, TextField, Skeleton, CircularProgress } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Dialog from "@mui/material/Dialog";
@@ -8,6 +8,9 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { useDispatch } from "react-redux";
+import { followUser, updateProfile } from "../../actions/profile"
+
 
 interface Shit {
   profileData: any;
@@ -18,6 +21,19 @@ const ProfileSidebarDark = (props: Shit) => {
   const { authData } = useSelector((user: any) => user.user);
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch()
+
+  type updateProfileDataType = {
+    username: string;
+    email: string;
+    bio: string;
+  }
+
+  const [updateProfileData, setUpdateProfileData] = useState<updateProfileDataType>({
+    username: authData?.username,
+    email: authData?.email,
+    bio: authData?.bio
+  })
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -26,6 +42,28 @@ const ProfileSidebarDark = (props: Shit) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  //@ts-ignore
+  const token = JSON.parse(localStorage.getItem("token"));
+  //@ts-ignore  
+  const tokenboi = token?.token
+
+  const updateProfileboi = () => {
+    handleClose()
+    dispatch(updateProfile(updateProfileData, tokenboi))
+  }
+
+  const [reloading, setreloading] = useState(false)
+
+  const followBoi = () => {
+    setreloading(true)
+    //@ts-ignore
+    dispatch(followUser(profileData._id, tokenboi))
+    setTimeout(() => {
+      setreloading(false)
+      //@ts-ignore
+    }, [1700])
+  }
   return (
     <div className="profilesidebardark">
       <div className="profilesidebarboi">
@@ -78,12 +116,14 @@ const ProfileSidebarDark = (props: Shit) => {
               </div>
             ) : (
               <div className="buttons">
-                {profileData ? <Button variant="outlined">Follow</Button> : <Skeleton animation="wave" variant="text" width={100} height={40} style={{
+                {profileData ? !reloading ? <Button variant="outlined" onClick={followBoi}>
+                  {profileData?.followers?.includes(authData?._id) ? "Unfollow" : "Follow"}
+                </Button> : <CircularProgress /> : <Skeleton animation="wave" variant="text" width={100} height={40} style={{
                   marginTop: "5px"
-                }} sx={{ bgcolor: 'grey.900' }} />}
+                }} />}
                 {profileData ? <Button variant="outlined">Message</Button> : <Skeleton animation="wave" variant="text" width={100} height={40} style={{
                   marginTop: "5px"
-                }} sx={{ bgcolor: 'grey.900' }} />}
+                }} />}
               </div>
             )}
           </div>
@@ -117,6 +157,8 @@ const ProfileSidebarDark = (props: Shit) => {
                 width: "100%",
                 marginTop: "1rem",
               }}
+              defaultValue={updateProfileData.username}
+              onChange={(e) => setUpdateProfileData({ ...updateProfileData, username: e.target.value })}
             />
             <TextField
               id="outlined-basic"
@@ -126,6 +168,8 @@ const ProfileSidebarDark = (props: Shit) => {
                 width: "100%",
                 marginTop: "1rem",
               }}
+              defaultValue={updateProfileData.email}
+              onChange={(e) => setUpdateProfileData({ ...updateProfileData, email: e.target.value })}
             />
             <TextField
               id="outlined-basic"
@@ -137,11 +181,14 @@ const ProfileSidebarDark = (props: Shit) => {
               }}
               multiline
               rows={4}
+              defaultValue={updateProfileData.bio}
+              onChange={(e) => setUpdateProfileData({ ...updateProfileData, bio: e.target.value })}
             />
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Create</Button>
+          {updateProfileData?.username?.length <= 3 &&
+            updateProfileData?.username?.length >= 16 && !updateProfileData?.email?.includes("@") ? <Button disabled>Update</Button> : <Button onClick={updateProfileboi}>Update</Button>}
         </DialogActions>
       </Dialog>
     </div>

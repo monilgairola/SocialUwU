@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./ProfileSidebar.css";
-import { Avatar, Tooltip, Button, IconButton, TextField, Skeleton } from "@mui/material";
+import { Avatar, Tooltip, Button, IconButton, TextField, Skeleton, CircularProgress } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Dialog from "@mui/material/Dialog";
@@ -52,9 +52,16 @@ const ProfileSidebar = (props: Shit) => {
     dispatch(updateProfile(updateProfileData, tokenboi))
   }
 
+  const [reloading, setreloading] = useState(false)
+
   const followBoi = () => {
+    setreloading(true)
     //@ts-ignore
     dispatch(followUser(profileData._id, tokenboi))
+    setTimeout(() => {
+      setreloading(false)
+      //@ts-ignore
+    }, [1700])
   }
 
   return (
@@ -108,9 +115,9 @@ const ProfileSidebar = (props: Shit) => {
               </div>
             ) : (
               <div className="buttons">
-                {profileData ? <Button variant="outlined" onClick={followBoi}>
+                {profileData ? !reloading ? <Button variant="outlined" onClick={followBoi}>
                   {profileData?.followers?.includes(authData?._id) ? "Unfollow" : "Follow"}
-                </Button> : <Skeleton animation="wave" variant="text" width={100} height={40} style={{
+                </Button> : <CircularProgress /> : <Skeleton animation="wave" variant="text" width={100} height={40} style={{
                   marginTop: "5px"
                 }} />}
                 {profileData ? <Button variant="outlined">Message</Button> : <Skeleton animation="wave" variant="text" width={100} height={40} style={{
