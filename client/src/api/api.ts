@@ -41,3 +41,8 @@ export const update_post = (id: string, data: any, token: any) => API.put(`/api/
     "token": token
   }
 })
+export const comment_boi = (id: string, data: any, token: any) => API.post(`/api/posts/${id}/comment`, data, {
+  headers: {
+    "token": token
+  }
+})

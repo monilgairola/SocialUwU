@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { deletePost, likePost, updatePost } from "../../actions/posts"
+import { commentStuff, deletePost, likePost, updatePost } from "../../actions/posts"
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -142,6 +142,16 @@ const FeedDark = (props: Props) => {
   const handleClosecomments = () => {
     setOpencomments(false);
   };
+
+  const [commentData, setCommentData] = useState("")
+
+  const comment = {
+    comment: commentData
+  }
+
+  const sendComment = () => {
+    dispatch(commentStuff(props?.posts?._id, comment, tokenboi))
+  }
 
   return (
     <>
@@ -373,6 +383,9 @@ const FeedDark = (props: Props) => {
       <Dialog
         fullScreen
         open={opencomment}
+        style={{
+          height: "100vh"
+        }}
       >
         <AppBar sx={{ position: 'sticky' }}>
           <Toolbar>
@@ -390,119 +403,26 @@ const FeedDark = (props: Props) => {
           </Toolbar>
         </AppBar>
         <List>
-          <ListItem button>
-            <ListItemAvatar>
-              <Avatar alt="" src="" sx={{
-                width: 50,
-                height: 50
-              }} />
-            </ListItemAvatar>
-            <ListItemText primary="Varun" secondary="Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro broEat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro brovEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro bro" />
-          </ListItem>
-          <ListItem button>
-            <ListItemAvatar>
-              <Avatar alt="" src="" sx={{
-                width: 50,
-                height: 50
-              }} />
-            </ListItemAvatar>
-            <ListItemText primary="Varun" secondary="Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro broEat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro brovEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro bro" />
-          </ListItem>
-          <ListItem button>
-            <ListItemAvatar>
-              <Avatar alt="" src="" sx={{
-                width: 50,
-                height: 50
-              }} />
-            </ListItemAvatar>
-            <ListItemText primary="Varun" secondary="Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro broEat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro brovEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro bro" />
-          </ListItem>
-          <ListItem button>
-            <ListItemAvatar>
-              <Avatar alt="" src="" sx={{
-                width: 50,
-                height: 50
-              }} />
-            </ListItemAvatar>
-            <ListItemText primary="Varun" secondary="Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro broEat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro brovEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro bro" />
-          </ListItem>
-          <ListItem button>
-            <ListItemAvatar>
-              <Avatar alt="" src="" sx={{
-                width: 50,
-                height: 50
-              }} />
-            </ListItemAvatar>
-            <ListItemText primary="Varun" secondary="Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro broEat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro brovEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro bro" />
-          </ListItem>
-          <ListItem button>
-            <ListItemAvatar>
-              <Avatar alt="" src="" sx={{
-                width: 50,
-                height: 50
-              }} />
-            </ListItemAvatar>
-            <ListItemText primary="Varun" secondary="Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro broEat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro brovEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro bro" />
-          </ListItem>
-          <ListItem button>
-            <ListItemAvatar>
-              <Avatar alt="" src="" sx={{
-                width: 50,
-                height: 50
-              }} />
-            </ListItemAvatar>
-            <ListItemText primary="Varun" secondary="Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro broEat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro brovEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro bro" />
-          </ListItem>
-          <ListItem button>
-            <ListItemAvatar>
-              <Avatar alt="" src="" sx={{
-                width: 50,
-                height: 50
-              }} />
-            </ListItemAvatar>
-            <ListItemText primary="Varun" secondary="Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro broEat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro brovEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro bro" />
-          </ListItem>
-          <ListItem button>
-            <ListItemAvatar>
-              <Avatar alt="" src="" sx={{
-                width: 50,
-                height: 50
-              }} />
-            </ListItemAvatar>
-            <ListItemText primary="Varun" secondary="Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro broEat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro brovEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro bro" />
-          </ListItem>
-          <ListItem button>
-            <ListItemAvatar>
-              <Avatar alt="" src="" sx={{
-                width: 50,
-                height: 50
-              }} />
-            </ListItemAvatar>
-            <ListItemText primary="Varun" secondary="Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro broEat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro brovEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro bro" />
-          </ListItem>
-          <ListItem button>
-            <ListItemAvatar>
-              <Avatar alt="" src="" sx={{
-                width: 50,
-                height: 50
-              }} />
-            </ListItemAvatar>
-            <ListItemText primary="Varun" secondary="Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro broEat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro brovEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro bro" />
-          </ListItem>
-          <ListItem button>
-            <ListItemAvatar>
-              <Avatar alt="" src="" sx={{
-                width: 50,
-                height: 50
-              }} />
-            </ListItemAvatar>
-            <ListItemText primary="Varun" secondary="Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro broEat shit bro bro bro Eat shit bro bro bro Eat shit bro bro bro Eat shit bro bro brovEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro broEat shit bro bro bro" />
-          </ListItem>
-          <Divider />
+          {props?.posts?.comments?.map((comment: any) => (
+            <>
+              <ListItem button>
+                <ListItemAvatar>
+                  <Tooltip title={comment?.userboi?.username}>
+                    <Avatar alt="" src="" sx={{
+                      width: 50,
+                      height: 50
+                    }} />
+                  </Tooltip>
+                </ListItemAvatar>
+                <ListItemText primary={comment?.userboi?.username} secondary={comment?.comment} />
+              </ListItem>
+              <Divider />
+            </>
+          ))}
         </List>
         <div style={{
           width: "100%",
-          position: "sticky",
+          position: "fixed",
           bottom: 0,
           background: "#e0dede",
           display: "flex",
@@ -518,8 +438,10 @@ const FeedDark = (props: Props) => {
           }} />
           <TextField id="outlined-basic" label="Type shit comment ..." variant="outlined" style={{
             width: "56%"
+          }} onChange={(e) => {
+            setCommentData(e.target.value)
           }} />
-          <Button variant="contained">Send</Button>
+          {commentData?.trim()?.length >= 5 && commentData?.trim()?.length <= 100 ? <Button variant="contained" onClick={sendComment}>Send</Button> : <Button variant="contained" disabled>Send</Button>}
         </div>
       </Dialog>
     </>

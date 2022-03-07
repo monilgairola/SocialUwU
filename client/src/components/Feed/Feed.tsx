@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Avatar, IconButton, TextField, Tooltip } from "@mui/material";
+import { AppBar, Avatar, Divider, IconButton, List, ListItem, ListItemAvatar, ListItemText, TextField, Toolbar, Tooltip, Typography } from "@mui/material";
 import "./Feed.css";
 import { format } from "timeago.js"
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { deletePost, likePost, updatePost } from "../../actions/posts"
+import { commentStuff, deletePost, likePost, updatePost } from "../../actions/posts"
 import { useSelector, useDispatch } from "react-redux";
 import Button from "@mui/material/Button"
 import Checkbox from '@mui/material/Checkbox';
@@ -133,6 +133,27 @@ const Feed = (props: Props) => {
     handleCloseUpdate()
     dispatch(updatePost(postDataUpdate, tokenboi, props?.posts?._id))
   }
+
+  const [opencomment, setOpencomments] = React.useState(false);
+
+  const handleClickOpencomments = () => {
+    setOpencomments(true);
+  };
+
+  const handleClosecomments = () => {
+    setOpencomments(false);
+  };
+
+  const [commentData, setCommentData] = useState("")
+
+  const comment = {
+    comment: commentData
+  }
+
+  const sendComment = () => {
+    dispatch(commentStuff(props?.posts?._id, comment, tokenboi))
+  }
+
   return (
     <div className="feed">
       <div className="header">
@@ -185,7 +206,7 @@ const Feed = (props: Props) => {
             alignItems: "center",
             marginRight: "10px"
           }}>
-            <span>
+            <span onClick={handleClickOpencomments}>
               <i className="uil uil-comment"></i>
             </span>
             <p style={{
@@ -354,6 +375,71 @@ const Feed = (props: Props) => {
             Update
           </Button>}
         </DialogActions>
+      </Dialog>
+      {/* comments dialog */}
+      <Dialog
+        fullScreen
+        open={opencomment}
+        style={{
+          height: "100vh"
+        }}
+      >
+        <AppBar sx={{ position: 'sticky' }}>
+          <Toolbar>
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={handleClosecomments}
+              aria-label="close"
+            >
+              <i className="uil uil-times"></i>
+            </IconButton>
+            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+              Comments
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <List>
+          {props?.posts?.comments?.map((comment: any) => (
+            <>
+              <ListItem button>
+                <ListItemAvatar>
+                  <Tooltip title={comment?.userboi?.username}>
+                    <Avatar alt="" src="" sx={{
+                      width: 50,
+                      height: 50
+                    }} />
+                  </Tooltip>
+                </ListItemAvatar>
+                <ListItemText primary={comment?.userboi?.username} secondary={comment?.comment} />
+              </ListItem>
+              <Divider />
+            </>
+          ))}
+        </List>
+        <div style={{
+          width: "100%",
+          position: "fixed",
+          bottom: 0,
+          background: "#e0dede",
+          display: "flex",
+          alignItems: "center",
+          padding: "20px",
+          gap: "1rem",
+          borderRadius: "20px 20px 0 0px"
+        }}>
+          <Avatar alt="" src="" sx={{
+            width: 50,
+            height: 50,
+            cursor: "pointer"
+          }} />
+          <TextField id="outlined-basic" label="Type shit comment ..." variant="outlined" style={{
+            width: "56%"
+          }} onChange={(e) => {
+            setCommentData(e.target.value)
+          }} />
+          {commentData?.trim()?.length >= 5 && commentData?.trim()?.length <= 100 ? <Button variant="contained" onClick={sendComment}>Send</Button> : <Button variant="contained" disabled>Send</Button>}
+        </div>
       </Dialog>
     </div>
   );

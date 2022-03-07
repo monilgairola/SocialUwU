@@ -186,3 +186,35 @@ export const updatePost = (databoi: any, token: any, id: string) => async (dispa
         })
     }
 }
+
+export const commentStuff = (id: string, databoi: any, token: any) => async (dispatch: Dispatch) => {
+    const { data } = await api.comment_boi(id, databoi, token)
+    if (data.error) {
+        toast.error(data.error, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+    }
+    else {
+        toast.success("Commented shit succesfully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+        dispatch({
+            type: "COMMENT_STUFF",
+            data,
+        })
+    }
+}

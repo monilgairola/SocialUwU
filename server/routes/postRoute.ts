@@ -244,8 +244,8 @@ router.post(
             },
           },
         });
-        const postboi = await Post.findById(postId);
-        res.status(200).json(postboi);
+        const posts = await Post.find().sort({ createdAt: -1 });
+        res.status(200).json(posts);
       }
     } catch (error: any) {
       res.status(500).send({
