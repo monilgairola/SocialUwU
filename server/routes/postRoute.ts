@@ -192,7 +192,7 @@ router.put(
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         res.status(400).json({
-          errors: errors.array()[0].msg,
+          error: errors.array()[0].msg,
         });
       } else {
         const post = await Post.findById(postId);
@@ -201,8 +201,8 @@ router.put(
             caption: caption,
             image: image,
           });
-          const postboi = await Post.findById(postId);
-          res.status(200).json(postboi);
+          const posts = await Post.find().sort({ createdAt: -1 });
+          res.status(200).json(posts);
         } else {
           res.status(403).send({
             error: "You can't update other posts",

@@ -129,6 +129,7 @@ const FeedDark = (props: Props) => {
   }
 
   const updatePostBoi = () => {
+    handleCloseUpdate()
     dispatch(updatePost(postDataUpdate, tokenboi, props?.posts?._id))
   }
 
