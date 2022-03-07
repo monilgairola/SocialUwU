@@ -31,3 +31,8 @@ export const like_post = (id: string, token: any) => API.put(`/api/posts/like/${
     "token": token
   }
 })
+export const create_post = (data: any, token: any) => API.post("/api/posts", data, {
+  headers: {
+    "token": token
+  }
+})

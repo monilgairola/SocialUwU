@@ -122,3 +122,35 @@ export const likePost = (id: string, token: any) => async (dispatch: Dispatch) =
         })
     }
 }
+
+export const createPost = (databoi: any, token: any) => async (dispatch: Dispatch) => {
+    const { data } = await api.create_post(databoi, token)
+    if (data.error) {
+        toast.error(data.error, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+    }
+    else {
+        toast.success("Post created succesfully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+        dispatch({
+            type: "CREATE_POST",
+            data,
+        })
+    }
+}

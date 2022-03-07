@@ -3,7 +3,7 @@ import "./MiddleStuffDark.css";
 import FeedDark from "../FeedDark/FeedDark";
 import { Avatar, IconButton } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { getPosts } from "../../actions/posts";
+import { createPost, getPosts } from "../../actions/posts";
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -56,8 +56,14 @@ const MiddleStuffDark = () => {
       .catch(err => console.log(err))
   }
 
+  //@ts-ignore
+  const token = JSON.parse(localStorage.getItem("token"));
+  //@ts-ignore  
+  const tokenboi = token?.token
+
   const createPostboi = () => {
     handleClose()
+    dispatch(createPost(postData, tokenboi))
   }
 
   return (

@@ -39,7 +39,7 @@ router.post(
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         res.status(400).json({
-          errors: errors.array()[0].msg,
+          error: errors.array()[0].msg,
         });
       } else {
         const postboi = await Post.create({
@@ -47,7 +47,8 @@ router.post(
           image: image,
           userId: userId,
         });
-        res.status(201).json(postboi);
+        const posts = await Post.find().sort({ createdAt: -1 });
+        res.status(200).json(posts);
       }
     } catch (error: any) {
       res.status(500).send({
