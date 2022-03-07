@@ -17,6 +17,8 @@ export const posts = (state = { postsData: null }, action: Action) => {
             return { ...state, postsData: action?.data };
         case "CREATE_POST":
             return { ...state, postsData: action?.data };
+        case "UPDATE_POST":
+            return { ...state, postsData: action?.data };
         default:
             return state;
     }

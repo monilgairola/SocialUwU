@@ -131,9 +131,11 @@ const MiddleStuff = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Close</Button>
-          <Button onClick={createPostboi}>
+          {postData?.image === "" ? <Button onClick={createPostboi} disabled>
             Create
-          </Button>
+          </Button> : <Button onClick={createPostboi}>
+            Create
+          </Button>}
         </DialogActions>
       </Dialog>
     </div>

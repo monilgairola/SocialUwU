@@ -36,3 +36,8 @@ export const create_post = (data: any, token: any) => API.post("/api/posts", dat
     "token": token
   }
 })
+export const update_post = (id: string, data: any, token: any) => API.put(`/api/posts/${id}`, data, {
+  headers: {
+    "token": token
+  }
+})
