@@ -130,7 +130,11 @@ const FeedDark = (props: Props) => {
               marginRight: "10px"
             }}>
               <span onClick={likePostBoi}>
-                <i className="uil uil-heart"></i>
+                {props?.posts?.likes.includes(userboi?._id) ? <i className="material-icons" style={{
+                  fontSize: "1.3rem"
+                }}>
+                  favorite
+                </i> : <i className="uil uil-heart"></i>}
               </span>
               <p style={{
                 color: "white",

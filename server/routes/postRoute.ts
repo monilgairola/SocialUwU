@@ -100,13 +100,13 @@ router.put(
         await post.updateOne({
           $pull: { likes: userId },
         });
-        const newpost1 = await Post.findById(postId);
+        const newpost1 = await Post.find().sort({ createdAt: -1 });
         res.json(newpost1);
       } else {
         await post.updateOne({
           $push: { likes: userId },
         });
-        const newpost2 = await Post.findById(postId);
+        const newpost2 = await Post.find().sort({ createdAt: -1 });
         res.json(newpost2);
       }
     } catch (error: any) {
