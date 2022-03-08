@@ -12,6 +12,7 @@ import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { get_user_by_id } from "../../actions/user";
+import { toast } from "react-toastify";
 
 const BookMarks = () => {
   const navigate = useNavigate();
@@ -51,6 +52,18 @@ const BookMarks = () => {
       dispatch(get_user_by_id(userinfo?.user?._id, navigate));
     }
   }, [navigate, dispatch]);
+  useEffect(() => {
+    toast.info("This feature is not available yet", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    })
+  }, [])
   return (
     <div>
       {theme === "dark" ? <NavbarDark /> : <Navbar />}

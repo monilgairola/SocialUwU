@@ -262,7 +262,18 @@ const Feed = (props: Props) => {
               </span>
             </div>
             <div className="leftbuttons">
-              <span>
+              <span onClick={() => {
+                toast.info("This feature is not available yet", {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "light",
+                })
+              }}>
                 <Tooltip title="Save">
                   <i className="uil uil-bookmark"></i>
                 </Tooltip>
