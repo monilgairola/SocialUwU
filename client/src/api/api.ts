@@ -46,3 +46,5 @@ export const comment_boi = (id: string, data: any, token: any) => API.post(`/api
     "token": token
   }
 })
+
+export const search_post = (postname: any) => API.get(`/api/posts/search/${postname}`)

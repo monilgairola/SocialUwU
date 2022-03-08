@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NotFound from "./pages/NotFound/NotFound";
 
+
 const App: React.FC = () => {
   const Home = lazy(() => import("./pages/Home/Home"));
   const Explore = lazy(() => import("./pages/Explore/Explore"));
@@ -16,6 +17,7 @@ const App: React.FC = () => {
   const Settings = lazy(() => import("./pages/Settings/Settings"));
   const Auth = lazy(() => import("./pages/Auth/Auth"));
   const Profile = lazy(() => import("./pages/Profile/Profile"));
+  const Search = lazy(() => import("./pages/Search/Search"))
   return (
     <Router>
       <Suspense fallback={<Loader />}>
@@ -28,6 +30,7 @@ const App: React.FC = () => {
           <Route path="/settings" element={<Settings />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/profile/:profileid" element={<Profile />} />
+          <Route path="/search/:postname" element={<Search />} />
         </Routes>
       </Suspense>
       <ToastContainer />

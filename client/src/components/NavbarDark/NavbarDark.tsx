@@ -78,16 +78,25 @@ const NavbarDark: React.FC = () => {
     dispatch(createPost(postData, tokenboi))
   }
 
+  const [search, setSearch] = useState("")
+
   return (
     <nav className="navbarboidark">
       <div className="containerdark">
         <h2 className="logodark">SocialUwU</h2>
-        <div className="searchbar">
-          <i className="uil uil-search"></i>
-          <Tooltip title="Search shit">
-            <input type="text" placeholder="Search shit ..." />
-          </Tooltip>
-        </div>
+        <form onSubmit={(e: React.FormEvent) => {
+          e.preventDefault()
+          navigate("/search/" + search)
+        }}>
+          <div className="searchbar">
+            <i className="uil uil-search"></i>
+            <Tooltip title="Search shit">
+              <input type="text" placeholder="Search shit ..." onChange={(e) => {
+                setSearch(e.target.value)
+              }} />
+            </Tooltip>
+          </div>
+        </form>
         <div className="leftstuffdark">
           <Tooltip title="Create post">
             <p className="create-btn" onClick={handleClickOpencreate}>Create</p>
