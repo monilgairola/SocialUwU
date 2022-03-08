@@ -78,10 +78,14 @@ const Navbar: React.FC = () => {
         <h2 className="logo">SocialUwU</h2>
         <div className="searchbar">
           <i className="uil uil-search"></i>
-          <input type="text" placeholder="Search shit ..." />
+          <Tooltip title="Search shit">
+            <input type="text" placeholder="Search shit ..." />
+          </Tooltip>
         </div>
         <div className="leftstuff">
-          <p className="create-btn" onClick={handleClickOpencreate}>Create</p>
+          <Tooltip title="Create post">
+            <p className="create-btn" onClick={handleClickOpencreate}>Create</p>
+          </Tooltip>
           {user ? <Tooltip arrow title={user?.username}>
             <IconButton
               onClick={handleClick}

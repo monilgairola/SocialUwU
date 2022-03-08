@@ -198,8 +198,7 @@ const ProfileSidebar = (props: Shit) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          {updateProfileData?.username?.length <= 3 &&
-            updateProfileData?.username?.length >= 16 && !updateProfileData?.email?.includes("@") ? <Button disabled>Update</Button> : <Button onClick={updateProfileboi}>Update</Button>}
+          {updateProfileData?.username?.trim()?.length > 3 && updateProfileData?.username?.trim()?.length < 16 && updateProfileData?.email?.includes("@") ? <Button onClick={updateProfileboi}>Update</Button> : <Button disabled>Update</Button>}
         </DialogActions>
       </Dialog>
     </div>

@@ -223,11 +223,11 @@ const FeedDark = (props: Props) => {
                 marginRight: "10px"
               }}>
                 <span onClick={likePostBoi}>
-                  {props?.posts?.likes.includes(userboi?._id) ? <i className="material-icons" style={{
+                  {props?.posts?.likes.includes(userboi?._id) ? <Tooltip title="Remove like"><i className="material-icons" style={{
                     fontSize: "1.3rem"
                   }}>
                     favorite
-                  </i> : <i className="uil uil-heart"></i>}
+                  </i></Tooltip> : <Tooltip title="Add like"><i className="uil uil-heart"></i></Tooltip>}
                 </span>
                 <p style={{
                   color: "white",
@@ -240,7 +240,9 @@ const FeedDark = (props: Props) => {
                 marginRight: "10px"
               }}>
                 <span onClick={handleClickOpencomments}>
-                  <i className="uil uil-comment"></i>
+                  <Tooltip title="Comment">
+                    <i className="uil uil-comment"></i>
+                  </Tooltip>
                 </span>
                 <p style={{
                   color: "white",
@@ -248,12 +250,16 @@ const FeedDark = (props: Props) => {
                 }}>{props?.posts?.comments?.length}</p>
               </div>
               <span onClick={handleClickOpenreport}>
-                <i className="uil uil-megaphone"></i>
+                <Tooltip title="Report">
+                  <i className="uil uil-megaphone"></i>
+                </Tooltip>
               </span>
             </div>
             <div className="leftbuttons">
               <span>
-                <i className="uil uil-bookmark"></i>
+                <Tooltip title="Save">
+                  <i className="uil uil-bookmark"></i>
+                </Tooltip>
               </span>
             </div>
           </div>
@@ -262,7 +268,7 @@ const FeedDark = (props: Props) => {
               {props?.posts?.caption}
             </span>
           </div>
-          <p className="viewcomments">View all comments</p>
+          <p className="viewcomments" onClick={handleClickOpencomments}>View all comments</p>
           {/* edit delete menu  */}
           <Menu
             id="basic-menu"

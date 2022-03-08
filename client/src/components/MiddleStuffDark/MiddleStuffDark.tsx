@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./MiddleStuffDark.css";
 import FeedDark from "../FeedDark/FeedDark";
-import { Avatar, IconButton } from "@mui/material";
+import { Avatar, IconButton, Tooltip } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { createPost, getPosts } from "../../actions/posts";
 import Dialog from '@mui/material/Dialog';
@@ -61,7 +61,9 @@ const MiddleStuffDark = () => {
           width: 48,
           height: 48,
         }} />
-        <input type="text" placeholder="Create shitty post ..." onClick={handleClickOpen} onKeyPress={handleClickOpen} />
+        <Tooltip title="Create post">
+          <input type="text" placeholder="Create shitty post ..." onClick={handleClickOpen} onKeyPress={handleClickOpen} />
+        </Tooltip>
         <p className="buttonboi">Create</p>
       </div>
       <div className="feeds">
