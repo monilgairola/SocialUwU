@@ -118,9 +118,9 @@ const MiddleStuff = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Close</Button>
-          {postData?.image === "" ? <Button onClick={createPostboi} disabled>
+          {postData?.image && postData?.caption?.trim()?.length > 5 && postData?.caption?.trim()?.length < 100 ? <Button onClick={createPostboi}>
             Create
-          </Button> : <Button onClick={createPostboi}>
+          </Button> : <Button disabled>
             Create
           </Button>}
         </DialogActions>

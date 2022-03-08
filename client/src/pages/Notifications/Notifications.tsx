@@ -12,6 +12,7 @@ import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { get_user_by_id } from "../../actions/user";
+import { toast } from "react-toastify";
 
 const Notifications = () => {
   const navigate = useNavigate();
@@ -51,21 +52,35 @@ const Notifications = () => {
       dispatch(get_user_by_id(userinfo?.user?._id, navigate));
     }
   }, [navigate, dispatch]);
+  useEffect(() => {
+    toast.info("This feature is not available yet", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    })
+  }, [])
   return (
-    <div>
-      {theme === "dark" ? <NavbarDark /> : <Navbar />}
-      <main>
-        <div className="container">
-          {theme === "dark" ? <RightSidebarDark /> : <RightSidebar />}
-          {theme === "dark" ? (
-            <NotificationDark />
-          ) : (
-            <NotificationsMiddleStuff />
-          )}
-          {theme === "dark" ? <LeftSidebarDark /> : <LeftSidebar />}
-        </div>
-      </main>
-    </div>
+    <>
+      <div>
+        {theme === "dark" ? <NavbarDark /> : <Navbar />}
+        <main>
+          <div className="container">
+            {theme === "dark" ? <RightSidebarDark /> : <RightSidebar />}
+            {theme === "dark" ? (
+              <NotificationDark />
+            ) : (
+              <NotificationsMiddleStuff />
+            )}
+            {theme === "dark" ? <LeftSidebarDark /> : <LeftSidebar />}
+          </div>
+        </main>
+      </div>
+    </>
   );
 };
 

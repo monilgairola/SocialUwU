@@ -4,6 +4,7 @@ import "./App.css";
 import Loader from "./pages/Loader/Loader";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import NotFound from "./pages/NotFound/NotFound";
 
 const App: React.FC = () => {
   const Home = lazy(() => import("./pages/Home/Home"));
@@ -19,6 +20,7 @@ const App: React.FC = () => {
     <Router>
       <Suspense fallback={<Loader />}>
         <Routes>
+          <Route path="*" element={<NotFound />} />
           <Route path="/" element={<Home />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/notifications" element={<Notifications />} />

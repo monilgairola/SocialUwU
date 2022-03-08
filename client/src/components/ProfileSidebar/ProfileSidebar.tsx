@@ -10,6 +10,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useDispatch } from "react-redux";
 import { followUser, updateProfile } from "../../actions/profile"
+import { toast } from "react-toastify";
 
 interface Shit {
   profileData: any;
@@ -120,7 +121,18 @@ const ProfileSidebar = (props: Shit) => {
                 </Button> : <CircularProgress /> : <Skeleton animation="wave" variant="text" width={100} height={40} style={{
                   marginTop: "5px"
                 }} />}
-                {profileData ? <Button variant="outlined">Message</Button> : <Skeleton animation="wave" variant="text" width={100} height={40} style={{
+                {profileData ? <Button variant="outlined" onClick={() => {
+                  toast.info("This feature is not available yet", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                  })
+                }}>Message</Button> : <Skeleton animation="wave" variant="text" width={100} height={40} style={{
                   marginTop: "5px"
                 }} />}
               </div>

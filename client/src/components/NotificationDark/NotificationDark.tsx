@@ -23,7 +23,7 @@ const NotificationDark = () => {
           </span>
         </div>
         <div className="notificationtitle">
-          <p>Idiot liked you post</p>
+          <p>Idiot liked your post</p>
         </div>
       </div>
       <div className="notificationdark">
@@ -45,7 +45,7 @@ const NotificationDark = () => {
           </span>
         </div>
         <div className="notificationtitle">
-          <p>Idiot liked you post</p>
+          <p>Idiot liked your post</p>
         </div>
       </div>
       <div className="notificationdark">
@@ -67,7 +67,7 @@ const NotificationDark = () => {
           </span>
         </div>
         <div className="notificationtitle">
-          <p>Idiot liked you post</p>
+          <p>Idiot liked your post</p>
         </div>
       </div>
       <div className="notificationdark">
@@ -89,7 +89,7 @@ const NotificationDark = () => {
           </span>
         </div>
         <div className="notificationtitle">
-          <p>Idiot liked you post</p>
+          <p>Idiot liked your post</p>
         </div>
       </div>
       <div className="notificationdark">
@@ -111,7 +111,7 @@ const NotificationDark = () => {
           </span>
         </div>
         <div className="notificationtitle">
-          <p>Idiot liked you post</p>
+          <p>Idiot liked your post</p>
         </div>
       </div>
     </div>

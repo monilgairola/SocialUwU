@@ -358,9 +358,9 @@ const Feed = (props: Props) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Close</Button>
-          {postDataUpdate?.image === "" ? <Button disabled>
+          {postDataUpdate?.image && postDataUpdate?.caption?.trim()?.length > 5 && postDataUpdate?.caption?.trim()?.length < 100 ? <Button onClick={updatePostBoi}>
             Update
-          </Button> : <Button onClick={updatePostBoi}>
+          </Button> : <Button disabled>
             Update
           </Button>}
         </DialogActions>
