@@ -113,19 +113,7 @@ const FeedDark = (props: Props) => {
 
   //@ts-ignore
   const imageUpload = (e) => {
-    //@ts-ignore
-    const data = new FormData()
-    data.append("file", e?.target?.files[0])
-    data.append("upload_preset", "socialuwu")
-    data.append("cloud_name", "painmanbrand")
-    fetch("https://api.cloudinary.com/v1_1/painmanbrand/image/upload", {
-      method: "POST",
-      body: data
-    }).then(res => res.json())
-      .then(data => {
-        setPostDataUpdate({ ...postDataUpdate, image: data?.url })
-      })
-      .catch(err => console.log(err))
+
   }
 
   const updatePostBoi = () => {
@@ -150,6 +138,7 @@ const FeedDark = (props: Props) => {
   }
 
   const sendComment = () => {
+    setCommentData("")
     dispatch(commentStuff(props?.posts?._id, comment, tokenboi))
   }
 

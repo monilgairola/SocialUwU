@@ -1,23 +1,28 @@
 import React from "react";
 import "./RightSidebar.css";
 import { useNavigate } from "react-router-dom";
+import { Tooltip } from "@mui/material";
 
 const RightSidebar = () => {
   const navigate = useNavigate();
   return (
     <div className="rightsidebar">
-      <div className="profile">
-        <div className="profile-img">
-          <img
-            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.fetchfind.com%2Fblog%2Fwp-content%2Fuploads%2F2017%2F08%2Fcat-2734999_1920-5-common-cat-sounds.jpg&f=1&nofb=1"
-            alt=""
-          />
+      <Tooltip title="Creator of this shit">
+        <div className="profile" style={{
+          cursor: "pointer"
+        }}>
+          <div className="profile-img">
+            <img
+              src="/catboi.jpeg"
+              alt=""
+            />
+          </div>
+          <div className="stuff">
+            <h4>Painman</h4>
+            <p>@painman</p>
+          </div>
         </div>
-        <div className="stuff">
-          <h4>Varun</h4>
-          <p>@varun</p>
-        </div>
-      </div>
+      </Tooltip>
       <div className="sidebar">
         {window.location.href === "https://socialuwu.netlify.app/" ? (
           <div className="sidebar-item home-sidebar-active">
@@ -60,7 +65,7 @@ const RightSidebar = () => {
           </div>
         )}
         {window.location.href ===
-        "https://socialuwu.netlify.app/notifications" ? (
+          "https://socialuwu.netlify.app/notifications" ? (
           <div className="sidebar-item notification-sidebar-active">
             <span>
               <i className="uil uil-bell"></i>

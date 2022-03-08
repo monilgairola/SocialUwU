@@ -36,24 +36,11 @@ const MiddleStuff = () => {
 
   const [postData, setPostData] = useState({
     caption: "",
-    image: ""
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.fetchfind.com%2Fblog%2Fwp-content%2Fuploads%2F2017%2F08%2Fcat-2734999_1920-5-common-cat-sounds.jpg&f=1&nofb=1"
   })
 
   //@ts-ignore
   const imageUpload = (e) => {
-    //@ts-ignore
-    const data = new FormData()
-    data.append("file", e?.target?.files[0])
-    data.append("upload_preset", "socialuwu")
-    data.append("cloud_name", "painmanbrand")
-    fetch("https://api.cloudinary.com/v1_1/painmanbrand/image/upload", {
-      method: "POST",
-      body: data
-    }).then(res => res.json())
-      .then(data => {
-        setPostData({ ...postData, image: data?.url })
-      })
-      .catch(err => console.log(err))
   }
 
   //@ts-ignore
