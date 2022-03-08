@@ -1,15 +1,16 @@
 # [SocialUwU](https://socialuwu.netlify.app/)
 
 ## Introduction
-Social media website made by an idiot(me :)) with react,typescript,css UwU
-
-Note - Backend is in developement.This is just ui stuff so UwU
+Social media website made by an idiot(me :)) with react,typescript,css,express,node,mongodb UwU
 
 ## Technologies Used
 - React
 - Typescript
 - Css
-- Will use express,mongo and typescript for backend
+- Express
+- Node js
+- Mongodb
+- Multer(for image uploading and stuff)
 
 ## Screenshots
 <img src = "https://github.com/VarunLanjhara/SocialUwU/blob/main/client/github_images/homepagedark.png" alt = "" width = "1100px" height = "500px">
@@ -23,4 +24,4 @@ Note - Backend is in developement.This is just ui stuff so UwU
 <img src = "https://github.com/VarunLanjhara/SocialUwU/blob/main/client/github_images/settingsdark.png" alt = "" width = "1100px" height = "500px">
 <img src = "https://github.com/VarunLanjhara/SocialUwU/blob/main/client/github_images/settinglight.png" alt = "" width = "1100px" height = "500px">
 
-and its mobile responsive also :)
+its mobile responsive but recommended to check pc :cheemsdorime:
