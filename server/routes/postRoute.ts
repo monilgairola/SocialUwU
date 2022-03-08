@@ -4,8 +4,23 @@ import { omit } from "lodash";
 import isAuthenticated from "../middlewares/isAuthenticated";
 import Post from "../models/postModel";
 import User from "../models/userModel";
+import multer from "multer"
 
 const router: Router = express.Router();
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '../public/images')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + file.originalname)
+  }
+})
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 1024 * 1024 * 3 },
+})
 
 //get all posts
 router.get("/", async (req: Request, res: Response) => {
@@ -254,5 +269,15 @@ router.post(
     }
   }
 );
+
+router.post("/imageboi", upload.single("image"), async (req, res) => {
+  try {
+    res.json("Uploaded")
+  } catch (error: any) {
+    res.status(500).send({
+      error: error.message,
+    });
+  }
+})
 
 export default router;

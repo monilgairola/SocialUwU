@@ -12,6 +12,7 @@ import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import { createPost } from "../../actions/posts";
 import { useDispatch } from "react-redux";
+import axios from "axios"
 
 const RightSidebar = () => {
   const navigate = useNavigate();
@@ -32,11 +33,17 @@ const RightSidebar = () => {
 
   const [postData, setPostData] = useState({
     caption: "",
-    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.fetchfind.com%2Fblog%2Fwp-content%2Fuploads%2F2017%2F08%2Fcat-2734999_1920-5-common-cat-sounds.jpg&f=1&nofb=1"
+    image: ""
   })
 
   //@ts-ignore
-  const imageUpload = (e) => {
+  const imageUpload = async (e) => {
+    const data = new FormData()
+    data.append("image", e?.target?.files[0])
+    await axios.post("https://socialuwu.herokuapp.com/upload", data).then((res) => {
+      const data = res?.data
+      setPostData({ ...postData, image: `https://socialuwu.herokuapp.com/images/${data?.filename}` })
+    })
   }
 
   //@ts-ignore

@@ -114,8 +114,13 @@ const FeedDark = (props: Props) => {
   })
 
   //@ts-ignore
-  const imageUpload = (e) => {
-
+  const imageUpload = async (e) => {
+    const data = new FormData()
+    data.append("image", e?.target?.files[0])
+    await axios.post("https://socialuwu.herokuapp.com/upload", data).then((res) => {
+      const data = res?.data
+      setPostDataUpdate({ ...postDataUpdate, image: `https://socialuwu.herokuapp.com/images/${data?.filename}` })
+    })
   }
 
   const updatePostBoi = () => {
