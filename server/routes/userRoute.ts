@@ -226,4 +226,26 @@ router.put(
   }
 );
 
+//who to follow
+router.get("/whotofollow", isAuthenticated, async (req: Request, res: Response) => {
+  const currentuserId = res.locals.user._id;
+  try {
+    const users = await User.find({
+      _id: {
+        $nin: [currentuserId],
+      },
+    }).sort({
+      createdAt: -1
+    }).limit(3)
+    const users2 = users.map((user: any) => {
+      return omit(user.toJSON(), "password");
+    });
+    res.status(200).json(users2);
+  } catch (error: any) {
+    res.status(500).send({
+      error: error.message,
+    });
+  }
+})
+
 export default router;

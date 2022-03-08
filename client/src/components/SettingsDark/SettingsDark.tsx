@@ -3,6 +3,7 @@ import "./SettingsDark.css";
 import Toggle from "react-toggle";
 import "react-toggle/style.css";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify"
 
 type Shit = {
   theme: string;
@@ -45,7 +46,18 @@ const SettingsDark = (props: Shit) => {
           <div className="top">
             <p>DANGER ZONE</p>
           </div>
-          <p className="deletebutton">Delete Account</p>
+          <p className="deletebutton" onClick={() => {
+            toast.warn("Get the fuck out of here", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            })
+          }}>Delete Account</p>
         </div>
       </div>
     </div>
