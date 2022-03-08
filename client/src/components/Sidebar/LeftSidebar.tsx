@@ -1,7 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./LeftSidebar.css";
+import axios from "axios"
+import { Avatar } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const LeftSidebar = () => {
+  const [profileToFollow, setprofileToFollow] = React.useState([])
+  const navigate = useNavigate()
+  //@ts-ignore
+  const token = JSON.parse(localStorage.getItem("token"));
+  //@ts-ignore  
+  const tokenboi = token?.token
+  useEffect(() => {
+    axios.get("https://socialuwu.herokuapp.com/api/users/whotofollow", {
+      headers: {
+        "token": tokenboi
+      }
+    }).then(res => {
+      setprofileToFollow(res.data)
+    })
+  }, [axios])
+  const profileRedirect = (id: any) => {
+    navigate(`/profile/${id}`)
+  }
+  const { authData } = useSelector((user: any) => user.user);
   return (
     <div className="leftsidebarfollow">
       <div className="whotofollow">
@@ -10,36 +33,18 @@ const LeftSidebar = () => {
           <h3>View more</h3>
         </div>
         <div className="body">
-          <div className="idiots">
-            <div className="idiotinfo">
-              <img
-                alt=""
-                src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.fetchfind.com%2Fblog%2Fwp-content%2Fuploads%2F2017%2F08%2Fcat-2734999_1920-5-common-cat-sounds.jpg&f=1&nofb=1"
-              />
-              <p>Varun</p>
+          {profileToFollow?.map((profile: any) => (
+            <div className="idiots">
+              <div className="idiotinfo">
+                <Avatar src="" alt="" sx={{
+                  width: 43,
+                  height: 43
+                }} onClick={() => { profileRedirect(profile?._id) }} />
+                <p>{profile?.username?.length > 4 ? profile?.username?.slice(0, 5) + "..." : profile?.username}</p>
+              </div>
+              <p className="follow" onClick={() => { profileRedirect(profile?._id) }}>{profile?.followers?.includes(authData?._id) ? "Unfollow" : "Follow"}</p>
             </div>
-            <p className="follow">Follow</p>
-          </div>
-          <div className="idiots">
-            <div className="idiotinfo">
-              <img
-                alt=""
-                src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.fetchfind.com%2Fblog%2Fwp-content%2Fuploads%2F2017%2F08%2Fcat-2734999_1920-5-common-cat-sounds.jpg&f=1&nofb=1"
-              />
-              <p>Varun</p>
-            </div>
-            <p className="follow">Follow</p>
-          </div>
-          <div className="idiots">
-            <div className="idiotinfo">
-              <img
-                alt=""
-                src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.fetchfind.com%2Fblog%2Fwp-content%2Fuploads%2F2017%2F08%2Fcat-2734999_1920-5-common-cat-sounds.jpg&f=1&nofb=1"
-              />
-              <p>Varun</p>
-            </div>
-            <p className="follow">Follow</p>
-          </div>
+          ))}
         </div>
       </div>
       <div className="topicsfollow">
