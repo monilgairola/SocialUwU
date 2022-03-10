@@ -9,9 +9,9 @@ import rateLimit from 'express-rate-limit'
 
 const createUserLimiter = rateLimit({
   windowMs: 60 * 60 * 1000,
-  max: 1,
+  max: 2,
   message: {
-    error: 'You can create only 1 account in 1 hour so yea touch some grass bro',
+    error: 'You can create only 2 accounts in 1 hour so yea touch some grass bro',
   },
   statusCode: 200
 })

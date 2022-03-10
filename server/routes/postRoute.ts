@@ -189,17 +189,32 @@ router.delete(
 
 //update post
 router.put("/:postId", upload.single("image"), isAuthenticated, async (req, res) => {
+  const userId = res.locals.user._id;
+  const { caption } = req.body;
+  const image = req?.file?.filename
+  const postId = req.params.postId;
+  const data = {
+    caption,
+    image
+  }
   try {
-    const { caption } = req.body;
-    const image = req?.file?.filename
-    const postId = req.params.postId;
-    const data = {
-      caption,
-      image
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(400).json({
+        error: errors.array()[0].msg,
+      });
     }
-    const postboi = await Post.findByIdAndUpdate(postId, data)
-    const posts = await Post.find().sort({ createdAt: -1 });
-    res.json(posts);
+    const post = await Post.findById(postId);
+    if (post?.userId === userId) {
+      await Post.findByIdAndUpdate(postId, data)
+      const posts = await Post.find().sort({ createdAt: -1 });
+      res.json(posts);
+    }
+    else {
+      res.json({
+        error: "You cant update other posts :)"
+      })
+    }
   } catch (error: any) {
     res.json({
       error: error.message
