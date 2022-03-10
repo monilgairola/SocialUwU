@@ -12,6 +12,9 @@ Social media website made by an idiot(me :)) with react,typescript,css,express,n
 - Mongodb
 - Multer(for image uploading and stuff)
 
+## Contributors
+### [Fireplonk](https://github.com/FirePlank/) - for pentesting the website
+
 ## Screenshots
 <img src = "https://github.com/VarunLanjhara/SocialUwU/blob/main/client/github_images/homedark.png" alt = "" width = "1100px" height = "500px">
 <img src = "https://github.com/VarunLanjhara/SocialUwU/blob/main/client/github_images/profileuser.png" alt = "" width = "1100px" height = "500px">
