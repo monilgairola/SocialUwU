@@ -1,7 +1,5 @@
 # [SocialUwU](https://socialuwu.netlify.app/)
 
-**NOTE** -- **ITS UNDER DEVELEOPEMENT BECAUSE OF SOME IDIOTS WHO STARTED SPAMMING NSFW CONTENT IT WILL BE UP IN FEW DAYS SO PLZ BE PATIENT(i know you dont care but stll)**
-
 ## Introduction
 Social media website made by an idiot(me :)) with react,typescript,css,express,node,mongodb UwU
 
