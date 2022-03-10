@@ -61,6 +61,7 @@ const Auth: React.FC = () => {
       window.location.href = "/";
     }
   }, [navigate, dispatch]);
+  const passwordCheck = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i").test(registerData.password)
   return (
     <div>
       <div className="container">
@@ -166,9 +167,11 @@ const Auth: React.FC = () => {
                 />
               </div>
               <div>
-                {registerData.username.trim().length >= 3 &&
-                  registerData.username.trim().length <= 16 &&
-                  registerData.password.trim().length >= 6 &&
+                {registerData.username.trim().length >= 4 &&
+                  registerData.username.trim().length <= 20 &&
+                  registerData.password.trim().length >= 8 &&
+                  registerData.password.trim().length <= 20 &&
+                  passwordCheck &&
                   registerData.password === registerData.confirmpassword &&
                   registerData.email.includes("@") ? (
                   reloadboi ? (
@@ -190,7 +193,7 @@ const Auth: React.FC = () => {
                 )}
                 {!reloadboi ? (
                   <Tooltip
-                    title="NOTE: username length must be greater than 4 letters and smoler than 16 letters,email should be valid and both password should match and must be greater than 6 letters :cheemsdorime:"
+                    title="NOTE: username length must be between 4 to 20 characters,email should be valid and both password should match and must be between 8 to 20 charcters and password should be combination of one uppercase,one lower case,one special char and one digit UwU"
                     arrow
                   >
                     <i
