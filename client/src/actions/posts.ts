@@ -98,7 +98,6 @@ export const deletePost = (id: string, token: any) => async (dispatch: Dispatch)
             type: "DELETE_POST",
             data,
         })
-        window.location.reload()
     }
 }
 
@@ -153,7 +152,6 @@ export const createPost = (databoi: any, token: any) => async (dispatch: Dispatc
             type: "CREATE_POST",
             data,
         })
-        window.location.reload()
     }
 }
 

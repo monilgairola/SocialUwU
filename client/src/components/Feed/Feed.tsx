@@ -42,7 +42,7 @@ const Feed = (props: Props) => {
       setPostUser(response.data);
       setLoading(false)
     })
-  }, [axios])
+  }, [axios, props?.posts?.userId])
   const profileRedirect = () => {
     navigate("/profile/" + postUser?._id);
   }
@@ -111,22 +111,23 @@ const Feed = (props: Props) => {
 
   const [postDataUpdate, setPostDataUpdate] = useState({
     caption: props?.posts?.caption,
-    image: props?.posts?.image
+    image: "https://socialuwu.herokuapp.com/images/" + props?.posts?.image
   })
+
+  const [imageUrl, setImageUrl] = useState("")
 
   //@ts-ignore
   const imageUpload = async (e) => {
-    const data = new FormData()
-    data.append("image", e?.target?.files[0])
-    await axios.post("https://socialuwu.herokuapp.com/upload", data).then((res) => {
-      const data = res?.data
-      setPostDataUpdate({ ...postDataUpdate, image: `https://socialuwu.herokuapp.com/images/${data?.filename}` })
-    })
+    setPostDataUpdate({ ...postDataUpdate, image: e?.target?.files[0] })
+    setImageUrl(URL.createObjectURL(e?.target?.files[0]))
   }
 
   const updatePostBoi = () => {
+    const data = new FormData()
+    data.append("caption", postDataUpdate?.caption)
+    data.append("image", postDataUpdate?.image)
+    dispatch(updatePost(data, tokenboi, props?.posts?._id))
     handleCloseUpdate()
-    dispatch(updatePost(postDataUpdate, tokenboi, props?.posts?._id))
   }
 
   const [opencomment, setOpencomments] = React.useState(false);
@@ -218,7 +219,7 @@ const Feed = (props: Props) => {
           <div className="image">
             <img
               alt=""
-              src={props?.posts?.image}
+              src={"https://socialuwu.herokuapp.com/images/" + props?.posts?.image}
             />
           </div>
           <div className="buttons">
@@ -418,10 +419,13 @@ const Feed = (props: Props) => {
                   Upload Image
                 </Button>
               </label>
-              {postDataUpdate?.image ? <img src={postDataUpdate?.image} alt="" style={{
+              {imageUrl !== "" ? <img src={imageUrl} alt="" style={{
                 width: "100%",
                 height: "auto",
-              }} /> : null}
+              }} /> : <img src={postDataUpdate?.image} alt="" style={{
+                width: "100%",
+                height: "auto",
+              }} />}
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose}>Close</Button>

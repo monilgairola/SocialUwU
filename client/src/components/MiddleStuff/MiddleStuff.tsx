@@ -40,14 +40,12 @@ const MiddleStuff = () => {
     image: ""
   })
 
+  const [imageUrl, setImageUrl] = useState("")
+
   //@ts-ignore
   const imageUpload = async (e) => {
-    const data = new FormData()
-    data.append("image", e?.target?.files[0])
-    await axios.post("https://socialuwu.herokuapp.com/upload", data).then((res) => {
-      const data = res?.data
-      setPostData({ ...postData, image: `https://socialuwu.herokuapp.com/images/${data?.filename}` })
-    })
+    setPostData({ ...postData, image: e?.target?.files[0] })
+    setImageUrl(URL.createObjectURL(e?.target?.files[0]))
   }
 
   //@ts-ignore
@@ -56,9 +54,13 @@ const MiddleStuff = () => {
   const tokenboi = token?.token
 
   const createPostboi = () => {
+    const data = new FormData()
+    data.append("caption", postData?.caption)
+    data.append("image", postData?.image)
+    dispatch(createPost(data, tokenboi))
     handleClose()
-    dispatch(createPost(postData, tokenboi))
   }
+
   return (
     <div>
       <div className="create-post-div">
@@ -120,7 +122,7 @@ const MiddleStuff = () => {
               Upload Image
             </Button>
           </label>
-          {postData?.image ? <img src={postData?.image} alt="" style={{
+          {imageUrl !== "" ? <img src={imageUrl} alt="" style={{
             width: "100%",
             height: "auto",
           }} /> : null}
