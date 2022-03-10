@@ -13,6 +13,7 @@ const createUserLimiter = rateLimit({
   message: {
     error: 'You can create only 1 account in 1 hour so yea touch some grass bro',
   },
+  statusCode: 200
 })
 
 
