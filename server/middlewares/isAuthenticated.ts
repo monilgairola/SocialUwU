@@ -14,7 +14,9 @@ const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
       res.locals.user = decoded.user;
       next();
     } catch (error: any) {
-      res.json(error.message);
+      res.json({
+        error: error.message
+      });
     }
   } else {
     res.status(401).send("Unauthorized");

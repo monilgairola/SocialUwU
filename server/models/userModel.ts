@@ -14,25 +14,25 @@ const UserSchema: Schema = new mongoose.Schema(
   {
     username: {
       type: String,
-      required: true,
-      unique: true,
-      min: 4,
-      max: 20,
+      required: [true, "username is required"],
+      unique: [true, "username is already taken"],
     },
     email: {
       type: String,
-      required: true,
-      unique: true,
+      required: [true, "email is required"],
+      unique: [true, "email already taken"],
     },
     password: {
       type: String,
       min: 6,
       max: 14,
-      required: true,
+      required: [true, "password is required"],
     },
     bio: {
       type: String,
-      default: "I am dumb",
+      default: "SocialUwU is piece of shit",
+      min: 5,
+      max: 100,
     },
     followers: {
       type: Array,

@@ -5,6 +5,16 @@ import { omit } from "lodash";
 import bcrypt from "bcrypt";
 import jwt, { Secret } from "jsonwebtoken";
 import isAuthenticated from "../middlewares/isAuthenticated";
+import rateLimit from 'express-rate-limit'
+
+const createUserLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 1,
+  message: {
+    error: 'You can create only 1 account in 1 hour so yea touch some grass bro',
+  },
+})
+
 
 const router: Router = express.Router();
 
@@ -28,10 +38,13 @@ router.post(
     .exists()
     .withMessage("password is required")
     .isLength({
-      min: 6,
-      max: 14,
+      min: 8,
+      max: 20,
     })
-    .withMessage("password must be between 6 and 14 characters"),
+    .withMessage("password must be between 8 and 20 characters")
+    .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i")
+    .withMessage('Password should be combination of one uppercase,one lower case,one special char and one digit'),
+  createUserLimiter,
   async (req: Request, res: Response) => {
     const { username, email, password } = req.body;
     try {
@@ -53,7 +66,7 @@ router.post(
             email: email,
             password: password,
           });
-          const userboi2 = omit(userboi.toJSON(), "password");
+          const userboi2 = omit(userboi.toJSON(), ["password", "email"]);
           res.status(201).json(userboi2);
         }
       }
@@ -77,10 +90,10 @@ router.post(
     .exists()
     .withMessage("password is required")
     .isLength({
-      min: 6,
-      max: 14,
+      min: 8,
+      max: 20,
     })
-    .withMessage("password must be between 6 and 14 characters"),
+    .withMessage("password must be between 8 and 20 characters"),
   async (req: Request, res: Response) => {
     try {
       const errors = validationResult(req);
@@ -102,7 +115,7 @@ router.post(
               error: "Invalid credentials",
             });
           } else {
-            const userboi = omit(user.toJSON(), "password");
+            const userboi = omit(user.toJSON(), ["password", "email"]);
             const token = jwt.sign(
               {
                 user: userboi,
@@ -129,8 +142,19 @@ router.post(
 //update profile
 router.put(
   "/update_profile",
-  body("email").isEmail().withMessage("email must be valid"),
-  body("username").exists().withMessage("username is required"),
+  body("username")
+    .exists()
+    .withMessage("username is required")
+    .isLength({
+      min: 4,
+      max: 20,
+    })
+    .withMessage("username must be between 4 and 20 characters"),
+  body("email")
+    .exists()
+    .withMessage("email is required")
+    .isEmail()
+    .withMessage("email must be valid"),
   isAuthenticated,
   async (req: Request, res: Response) => {
     const { username, email, bio } = req.body;
@@ -138,8 +162,8 @@ router.put(
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        res.status(400).json({
-          errors: errors.array()[0].msg,
+        res.json({
+          error: errors.array()[0].msg,
         });
       } else {
         await User.findByIdAndUpdate(userId, {
@@ -148,11 +172,11 @@ router.put(
           bio: bio,
         });
         const userboi = await User.findById(userId);
-        const userboi2 = omit(userboi?.toJSON(), "password");
+        const userboi2 = omit(userboi?.toJSON(), ["password", "email"]);
         res.status(200).json(userboi2);
       }
     } catch (error: any) {
-      res.status(500).send({
+      res.send({
         error: error.message,
       });
     }
@@ -164,11 +188,11 @@ router.get("/getbyid/:userId", async (req: Request, res: Response) => {
   const { userId } = req.params;
   try {
     const userboi = await User.findById(userId);
-    const userboi2 = omit(userboi?.toJSON(), "password");
+    const userboi2 = omit(userboi?.toJSON(), ["password", "email"]);
     res.status(200).json(userboi2);
   } catch (error: any) {
     res.send({
-      error: error.message,
+      error: "user not found",
     });
   }
 });
@@ -184,7 +208,7 @@ router.put(
       const user = await User.findById(userId);
       const currentuser = await User.findById(currentuserId);
       if (userId === currentuserId) {
-        res.status(403).json({
+        res.json({
           error: "You can't follow yourself",
         });
       } else {
@@ -219,7 +243,7 @@ router.put(
         }
       }
     } catch (error: any) {
-      res.status(500).send({
+      res.send({
         error: error.message,
       });
     }
@@ -238,7 +262,7 @@ router.get("/whotofollow", isAuthenticated, async (req: Request, res: Response) 
       createdAt: -1
     }).limit(3)
     const users2 = users.map((user: any) => {
-      return omit(user.toJSON(), "password");
+      return omit(user.toJSON(), ["password", "email"]);
     });
     res.status(200).json(users2);
   } catch (error: any) {

@@ -14,8 +14,12 @@ app.use(
   })
 );
 
+app.use(express.urlencoded({ extended: true }));
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
+app.use("/images", express.static("public/images"))
+app.get('/ip', (request, response) => response.send(request.ip))
+app.set('trust proxy', 1);
 
 dotenv.config({
   path: "./config.env",

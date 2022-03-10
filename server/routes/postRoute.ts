@@ -5,21 +5,43 @@ import isAuthenticated from "../middlewares/isAuthenticated";
 import Post from "../models/postModel";
 import User from "../models/userModel";
 import multer from "multer"
+import path from "path"
+import { v4 as uuidv4 } from 'uuid';
+import { rateLimit } from "express-rate-limit";
 
 const router: Router = express.Router();
 
+const createPostLimit = rateLimit({
+  windowMs: 20 * 60 * 1000,
+  max: 1,
+  message: {
+    error: 'You can create only 1 posts in 15 minutes so yea touch some grass bro :)',
+  },
+  statusCode: 200
+})
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../public/images')
+    cb(null, 'public/images')
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + file.originalname)
+    cb(null, uuidv4() + '-' + Date.now() + path.extname(file.originalname))
   }
 })
+
+const fileFilter = (req: Express.Request, file: Express.Multer.File, cb: any) => {
+  const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+  if (allowedFileTypes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+}
 
 const upload = multer({
   storage: storage,
   limits: { fileSize: 1024 * 1024 * 3 },
+  fileFilter: fileFilter
 })
 
 //get all posts
@@ -37,50 +59,28 @@ router.get("/", async (req: Request, res: Response) => {
 //create post
 router.post(
   "/",
-  body("caption")
-    .exists()
-    .withMessage("Caption in required")
-    .isLength({
-      min: 5,
-      max: 100,
-    })
-    .withMessage("Caption must be between 5 and 100 characters"),
-  body("image").exists().withMessage("Image is required"),
+  upload.single("image"),
+  createPostLimit,
   isAuthenticated,
   async (req: Request, res: Response) => {
-    const { caption, image } = req.body;
+    const { caption } = req.body;
+    const image = req?.file?.filename
     const userId = res.locals.user._id;
+    const data = {
+      caption,
+      image,
+      userId
+    }
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         res.status(400).json({
           error: errors.array()[0].msg,
         });
-      } else {
-        const postboi = await Post.create({
-          caption: caption,
-          image: image,
-          userId: userId,
-        });
-        const posts = await Post.find().sort({ createdAt: -1 });
-        res.status(200).json(posts);
       }
-    } catch (error: any) {
-      res.status(500).send({
-        error: error.message,
-      });
-    }
-  }
-);
-
-//get user posts
-router.get(
-  "/userposts",
-  isAuthenticated,
-  async (req: Request, res: Response) => {
-    const userId = res.locals.user._id;
-    try {
-      const posts = await Post.find({ userId: userId });
+      const postboi = new Post(data);
+      await postboi.save()
+      const posts = await Post.find().sort({ createdAt: -1 });
       res.status(200).json(posts);
     } catch (error: any) {
       res.status(500).send({
@@ -188,54 +188,29 @@ router.delete(
 );
 
 //update post
-router.put(
-  "/:postId",
-  body("caption")
-    .exists()
-    .withMessage("Caption in required")
-    .isLength({
-      min: 5,
-      max: 100,
-    })
-    .withMessage("Caption must be between 5 and 100 characters"),
-  body("image").exists().withMessage("Image is required"),
-  isAuthenticated,
-  async (req: Request, res: Response) => {
-    const { postId } = req.params;
-    const { caption, image } = req.body;
-    try {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        res.status(400).json({
-          error: errors.array()[0].msg,
-        });
-      } else {
-        const post = await Post.findById(postId);
-        if (post.userId === res.locals.user._id) {
-          await Post.findByIdAndUpdate(postId, {
-            caption: caption,
-            image: image,
-          });
-          const posts = await Post.find().sort({ createdAt: -1 });
-          res.status(200).json(posts);
-        } else {
-          res.status(403).send({
-            error: "You can't update other posts",
-          });
-        }
-      }
-    } catch (error: any) {
-      res.status(500).send({
-        error: error.message,
-      });
+router.put("/:postId", upload.single("image"), isAuthenticated, async (req, res) => {
+  try {
+    const { caption } = req.body;
+    const image = req?.file?.filename
+    const postId = req.params.postId;
+    const data = {
+      caption,
+      image
     }
+    const postboi = await Post.findByIdAndUpdate(postId, data)
+    const posts = await Post.find().sort({ createdAt: -1 });
+    res.json(posts);
+  } catch (error: any) {
+    res.json({
+      error: error.message
+    })
   }
-);
+})
 
 //comment on a post
 router.post(
   "/:postId/comment",
-  body("comment").exists().withMessage("Comment is required"),
+  body("comment").exists().withMessage("comment is required"),
   isAuthenticated,
   async (req: Request, res: Response) => {
     const { postId } = req.params;
@@ -250,7 +225,7 @@ router.post(
       } else {
         const post = await Post.findById(postId);
         const user = await User.findById(userId);
-        const userboi = omit(user?.toJSON(), "password");
+        const userboi = omit(user?.toJSON(), ["password", "email", "following", "followers", "bio", "createdAt", "updatedAt"]);
         await post.updateOne({
           $push: {
             comments: {
@@ -270,14 +245,32 @@ router.post(
   }
 );
 
-router.post("/imageboi", upload.single("image"), async (req, res) => {
+
+//search posts
+router.get(`/search/:postname`, async (req, res) => {
   try {
-    res.json("Uploaded")
-  } catch (error: any) {
-    res.status(500).send({
-      error: error.message,
+    const postboi = new RegExp(req.params.postname, "i");
+    const posts = await Post.find({
+      caption: postboi,
     });
+    res.json(posts);
+  } catch (err: any) {
+    res.json({
+      error: err.message
+    })
   }
 })
+
+//delete a user all posts
+// router.delete("/delete/:userid", async (req, res) => {
+//   try {
+//     const posts = await Post.find({ userId: req.params.userid }).deleteMany()
+//     res.json("deleted")
+//   } catch (error: any) {
+//     res.status(500).send({
+//       error: error.message,
+//     });
+//   }
+// })
 
 export default router;

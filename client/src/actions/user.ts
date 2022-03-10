@@ -63,7 +63,8 @@ export const register =
 export const get_user_by_id =
   (id: string, navigate: any) => async (dispatch: Dispatch) => {
     const { data } = await api.get_user_by_id(id);
-    if (data.error) {
+    console.log(Object.entries(data).length)
+    if (data.error || Object.entries(data).length === 0) {
       localStorage.removeItem("token");
       window.location.href = "/auth";
     } else {

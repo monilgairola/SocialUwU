@@ -12,11 +12,13 @@ const PostSchema: Schema = new mongoose.Schema(
   {
     caption: {
       type: String,
-      required: true,
+      required: [true, "caption is required"],
+      min: 5,
+      max: 100,
     },
     image: {
       type: String,
-      required: true,
+      required: [true, "image is required"],
     },
     likes: {
       type: Array,

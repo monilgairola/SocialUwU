@@ -467,6 +467,8 @@ const FeedDark = (props: Props) => {
                         <Avatar alt="" src="" sx={{
                           width: 50,
                           height: 50
+                        }} onClick={() => {
+                          navigate(`/profile/${comment?.userboi?._id}`)
                         }} />
                       </Tooltip>
                     </ListItemAvatar>
