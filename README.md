@@ -12,6 +12,8 @@ Social media website made by an idiot(me :)) with react,typescript,css,express,n
 - Mongodb
 - Multer(for image uploading and stuff)
 
+Updated version - https://github.com/VarunLanjhara/OnlyUwU
+
 ## Contributors
 ### [Fireplonk](https://github.com/FirePlank/) - for pentesting the website
 
