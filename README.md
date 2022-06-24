@@ -1,9 +1,13 @@
 # [SocialUwU](https://socialuwu.netlify.app/)
 
+## **Updated version - https://github.com/VarunLanjhara/OnlyUwU**
+
 ## Introduction
+
 Social media website made by an idiot(me :)) with react,typescript,css,express,node,mongodb UwU
 
 ## Technologies Used
+
 - React
 - Typescript
 - Css
@@ -12,17 +16,17 @@ Social media website made by an idiot(me :)) with react,typescript,css,express,n
 - Mongodb
 - Multer(for image uploading and stuff)
 
-Updated version - https://github.com/VarunLanjhara/OnlyUwU
-
 ## Contributors
+
 ### [Fireplonk](https://github.com/FirePlank/) - for pentesting the website
 
 ## Screenshots
+
 <img src = "https://github.com/VarunLanjhara/SocialUwU/blob/main/client/github_images/homedark.png" alt = "" width = "1100px" height = "500px">
 <img src = "https://github.com/VarunLanjhara/SocialUwU/blob/main/client/github_images/profileuser.png" alt = "" width = "1100px" height = "500px">
 <img src = "https://github.com/VarunLanjhara/SocialUwU/blob/main/client/github_images/profileotheruser.png" alt = "" width = "1100px" height = "500px">
 <img src = "https://github.com/VarunLanjhara/SocialUwU/blob/main/client/github_images/settings.png" alt = "" width = "1100px" height = "500px">
 
-these are some screeshots go check website :stab:
+these are just some screeshots go check website :stab:
 
-**its mobile responsive but recommend to use in pc :cheemsdorime:**
+**:cheemsdorime:**
