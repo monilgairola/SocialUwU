@@ -1,40 +1,40 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import "./Auth.css";
-import CircularProgress from "@mui/material/CircularProgress";
-import Tooltip from "@mui/material/Tooltip";
-import { login, register } from "../../actions/user";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import './Auth.css';
+import CircularProgress from '@mui/material/CircularProgress';
+import Tooltip from '@mui/material/Tooltip';
+import { login, register } from '../../actions/user';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Auth: React.FC = () => {
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const [registerData, setRegisterData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmpassword: "",
+    username: '',
+    email: '',
+    password: '',
+    confirmpassword: '',
   });
   const [reloadboi, setreloadboi] = useState(false);
   useEffect(() => {
-    document.title = "SocialUwU - Login";
-    const signInBtn = document.querySelector("#sign-in-btn");
-    const signUpBtn = document.querySelector("#sign-up-btn");
-    const container = document.querySelector(".container");
+    document.title = 'SocialUwU - Login';
+    const signInBtn = document.querySelector('#sign-in-btn');
+    const signUpBtn = document.querySelector('#sign-up-btn');
+    const container = document.querySelector('.container');
 
-    signUpBtn?.addEventListener("click", () => {
-      container?.classList.add("sign-up-mode");
-      document.title = "SocialUwU - Register";
+    signUpBtn?.addEventListener('click', () => {
+      container?.classList.add('sign-up-mode');
+      document.title = 'SocialUwU - Register';
     });
 
-    signInBtn?.addEventListener("click", () => {
-      container?.classList.remove("sign-up-mode");
-      document.title = "SocialUwU - Login";
+    signInBtn?.addEventListener('click', () => {
+      container?.classList.remove('sign-up-mode');
+      document.title = 'SocialUwU - Login';
     });
   }, []);
   const dispatch = useDispatch();
@@ -52,16 +52,19 @@ const Auth: React.FC = () => {
     let token = [];
     try {
       //@ts-ignore
-      token = JSON.parse(localStorage.getItem("token"));
+      token = JSON.parse(localStorage.getItem('token'));
     } catch (error) {
-      localStorage.removeItem("token");
-      window.location.href = "/";
+      localStorage.removeItem('token');
+      window.location.href = '/';
     }
     if (token) {
-      window.location.href = "/";
+      window.location.href = '/';
     }
   }, [navigate, dispatch]);
-  const passwordCheck = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i").test(registerData.password)
+  const passwordCheck = new RegExp(
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/,
+    'i'
+  ).test(registerData.password);
   return (
     <div>
       <div className="container">
@@ -91,8 +94,8 @@ const Auth: React.FC = () => {
                   }
                 />
               </div>
-              {loginData.email.includes("@") &&
-                loginData.password.trim().length >= 6 ? (
+              {loginData.email.includes('@') &&
+              loginData.password.trim().length >= 6 ? (
                 reloadboi ? (
                   <CircularProgress />
                 ) : (
@@ -168,12 +171,12 @@ const Auth: React.FC = () => {
               </div>
               <div>
                 {registerData.username.trim().length >= 4 &&
-                  registerData.username.trim().length <= 20 &&
-                  registerData.password.trim().length >= 8 &&
-                  registerData.password.trim().length <= 20 &&
-                  passwordCheck &&
-                  registerData.password === registerData.confirmpassword &&
-                  registerData.email.includes("@") ? (
+                registerData.username.trim().length <= 20 &&
+                registerData.password.trim().length >= 8 &&
+                registerData.password.trim().length <= 20 &&
+                passwordCheck &&
+                registerData.password === registerData.confirmpassword &&
+                registerData.email.includes('@') ? (
                   reloadboi ? (
                     <CircularProgress />
                   ) : (
@@ -199,17 +202,17 @@ const Auth: React.FC = () => {
                     <i
                       className="uil uil-info-circle"
                       style={{
-                        cursor: "pointer",
-                        marginLeft: "2rem",
-                        fontSize: "1.3rem",
-                        color: "gray",
+                        cursor: 'pointer',
+                        marginLeft: '2rem',
+                        fontSize: '1.3rem',
+                        color: 'gray',
                       }}
                     ></i>
                   </Tooltip>
                 ) : (
-                  ""
+                  ''
                 )}
-              </div>{" "}
+              </div>{' '}
             </form>
           </div>
         </div>
@@ -218,7 +221,7 @@ const Auth: React.FC = () => {
             <div className="panel__content">
               <h3 className="panel__title">New here ?</h3>
               <p className="panel__paragraph">
-                Are you new here go sign up else (　-_･) ︻デ═一
+                Are you new here go sign up else (-_･) ︻デ═一
               </p>
               <button className="btn btn-transparent" id="sign-up-btn">
                 Register
